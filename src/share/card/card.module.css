@@ -1,0 +1,23 @@
+.responsiveCard {
+    width: 100%;
+    max-width: 400px;
+    /* margin: 0 auto; */
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    /* margin-top:50px; */
+  }
+  
+  .responsiveCard h6 {
+    margin: 5px 0;
+  }
+  .image{
+    width: 32%;
+  }
+  .cardname{
+    padding: 10px;
+  }

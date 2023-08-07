@@ -1,0 +1,51 @@
+.plot_image {
+    height: 100vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    background-image: url('https://cdn.pixabay.com/photo/2016/11/18/13/20/brick-wall-1834446_1280.jpg');
+}
+.search{
+    display: flex;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    width: 100%;
+}
+
+.search_button{
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: white;
+    width: 48px;
+    margin-right:25px;
+}
+
+.search_input{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 30%;
+}
+.add_button{
+    width: 60px;
+    border-radius: 9px;
+    margin-left: 33px;
+    border-color: aliceblue;
+}
+.responsiveCard {
+    width: 100%;
+    max-width: 400px; /* Adjust the maximum width as needed */
+    margin: 0 auto;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    background-color: #fff;
+    padding: 10px;
+    display: flex;
+    flex-direction: row;
+    cursor: pointer;
+  }
+  
+  .responsiveCard h6 {
+    margin: 5px 0;
+  }
+

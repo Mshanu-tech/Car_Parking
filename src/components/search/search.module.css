@@ -1,0 +1,26 @@
+.search{
+    display: flex;
+    /* flex-wrap: nowrap; */
+    justify-content: center;
+    width: 100%;
+}
+
+.search_button{
+    border-top-right-radius: 6px;
+    border-bottom-right-radius: 6px;
+    border: white;
+    width: 48px;
+    margin-right:25px;
+}
+
+.search_input{
+    border-top-right-radius: 0px;
+    border-bottom-right-radius: 0px;
+    width: 30%;
+}
+.add_button{
+    width: 60px;
+    border-radius: 9px;
+    margin-left: 33px;
+    border-color: aliceblue;
+}

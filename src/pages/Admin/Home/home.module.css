@@ -1,0 +1,116 @@
+body{
+    background-color: rgb(255, 255, 255);
+}
+.main{
+    background-color: aqua;
+    height: 100vh;
+    display: flex;
+}
+.leftside{
+    width: 30%;
+    display: flex;
+    position: relative;
+    background-color: rgb(0, 0, 0);
+    /* align-items: center; */
+}
+.rightside{
+    width: 70%;
+    background-color: black;
+}
+.profile{
+    position: sticky;
+    top: 20px; 
+    background-color: black;
+    height: 100%;
+}
+.profileImage{
+    width: 100%;
+    padding-top: 40px;
+    display: flex;
+    justify-content: center;
+}
+.profilename{
+    font-weight: bold;
+    font-size: 20px;
+    color: white;
+    display: flex;
+    justify-content: center;
+}
+.owners{
+    background-color: rgb(0, 0, 0);
+    height: 33%;
+}
+.plots{
+/* background-color: blue; */
+height: 30%;
+}
+.users{
+/* background-color: yellowgreen; */
+height: 33%;
+}
+  .BTN{
+    display: none;
+  }
+  .adminimage{
+    width: 55%;
+  }
+  .adminBTN{
+    display: flex;
+    justify-content: center;
+  }
+
+  @media only screen and (max-width: 1192px) {
+    .owners{
+        height: 380px;
+    }
+    .plots{
+        height: 337px;
+    }
+    .users{
+        height: 380px;
+    }
+  }
+
+  @media only screen and (max-width: 900px) {
+    .leftside {
+      display: none;
+    }
+    .BTN{
+        display: block;
+      }
+    .rightside {
+        width: 100%;
+    }
+    .owners{
+        height: 200px;
+    }
+    .plots{
+        height: 200px;
+    }
+    .users{
+        height: 200px;
+    }
+  }
+  @media only screen and (max-width: 838px ) {
+    .owners{
+        height: 380px;
+    }
+    .plots{
+        height: 337px;
+    }
+    .users{
+        height: 380px;
+    }
+  }
+  .sub_heading{
+    font-weight: bold;
+    padding-top: 15px;
+  }
+  .align_card{
+    display: flex;
+    flex-wrap: wrap; 
+    justify-content: center;
+  }
+
+
+  

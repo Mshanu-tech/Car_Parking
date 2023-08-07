@@ -1,0 +1,15 @@
+.main_image{
+    background-image: url('/image/owner/owner_home.jpg');
+    height: 84vh;
+    background-position: center;
+    background-size: cover;
+    background-repeat: no-repeat;
+    display: flex;
+    align-items: center;
+    justify-content: space-evenly;
+}
+.button{
+    border-radius: 7px;
+    border-color: floralwhite;
+    width: 70px;
+}

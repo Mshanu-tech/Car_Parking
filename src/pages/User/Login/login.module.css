@@ -1,0 +1,11 @@
+body{
+    margin: 0px;
+}
+.bg{
+    width: 800px;
+    height: 600px;
+    margin-left: 19%;
+    /* margin-top: 15%; */
+    background-repeat: no-repeat;
+    background-image: url('https://c0.wallpaperflare.com/preview/905/638/554/sign-light-night-carpark.jpg');
+}
