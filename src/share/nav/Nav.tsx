@@ -1,23 +1,37 @@
-import Container from 'react-bootstrap/Container';
+// import Container from 'react-bootstrap/Container';
 import React from 'react';
-import Navbar from 'react-bootstrap/Navbar';
-// import NavDropdown from 'react-bootstrap/NavDropdown';
-import Btn from '../../components/button/Btn';
+import Nav from '../../components/nav/Nav';
+import { isLoggedin } from '../../api/owner';
 import { useNavigate } from 'react-router-dom';
 
-const nav: React.FC = () => {
+interface Props {
+  // BtnName:string,
+  // BtnAction:any
+}
+
+const nav: React.FC<Props> = () => {
+
   const navigate = useNavigate()
-  const handleBtn = () => {
-    console.log("heelo")
-    navigate('login')
-  }
+
+  const handleProfile = () => {
+    navigate('/owner/profile');
+    console.log("profile");
+}
+
+const handleLogin = () => {
+    navigate('/owner/login');
+    console.log("Login");
+}
+
   return (
-    <Navbar expand="lg">
-      <Container fluid style={{ width: "90%" }}>
-        <Navbar.Brand href="#"><img style={{ width: "70px" }} src="/image/user/icon.jpg" alt="" /></Navbar.Brand>
-        <Btn color='outline-success' Btnname="LOGIN" buttonhandler={handleBtn} />
-      </Container>
-    </Navbar>
+   <>
+            {isLoggedin() ? (
+                <Nav BtnName="Profile" BtnAction={handleProfile} />
+            ) : (
+                <Nav BtnName="Login" BtnAction={handleLogin} />
+            )}
+
+   </>
   );
 }
 

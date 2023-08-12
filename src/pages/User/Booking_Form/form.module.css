@@ -1,0 +1,28 @@
+.form_div{
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.form{
+    display: flex;
+    flex-direction: column;
+    width: 300px;
+    color: black;
+}
+input{
+    border-radius: 5px;
+    border-style: none;
+}
+.form_btn{
+    margin-top: 15px;
+    border: 1px solid rgb(0, 255, 42);
+    border-radius: 5px;
+}
+.form_btn:hover{
+    background-color: rgb(4, 255, 46);
+}
+.form_div{
+    background-color: #ffd600;
+}

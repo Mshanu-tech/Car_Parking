@@ -1,12 +1,21 @@
 import React, { useState } from 'react';
 import style from './login.module.css';
-import axios from 'axios';
-import {userSignup} from '../../../service/ownerApi';
+// import axios from 'axios';
+import { ownerLogin } from '../../../service/ownerApi';
+import {ownerSignup} from '../../../service/ownerApi';
+import {ADD} from '../../../components/createSlice/OwnerSignup'
+import { OwnerData } from '../../../components/createSlice/OwnerLogin';
+import { saveOwner } from '../../../api/owner';
+import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
 
 // type Props = {};
 // props: Props
 
 const Login: React.FC = () => {
+  const navigate = useNavigate()
+  const dispatch = useDispatch();
+  // const [state, setstate]=useState()
   const [name, setName] = useState('')
   const [email, setemail] = useState('')
   const [phone, setphone] = useState('')
@@ -14,7 +23,6 @@ const Login: React.FC = () => {
 
   const handleSignup = async (e: any) => {
 
-    
     e.preventDefault();
     const userData = {
       name,
@@ -22,9 +30,11 @@ const Login: React.FC = () => {
       phone,
       password
     };
-    console.log(userData);
+    // console.log(userData);
+    dispatch(ADD(userData))
+   await ownerSignup(userData)
+    navigate('/owner')
 
-    userSignup(userData)
 
     // try {
     //   await axios.post("http://localhost:5000/owner/signup", userData);
@@ -34,20 +44,30 @@ const Login: React.FC = () => {
     // }
   }
 
-  const handleLogin = async () => {
+  const handleLogin = async (e:any) => {
+    e.preventDefault();
+
     const loginData = {
       email,
       password,
-    }
+    };
 
-    try {
-
-   await axios.post("http://localhost:5000/owner/login", loginData);
-      console.log("success",loginData);
-    } catch (error) {
-      console.log( error);
-    }
-  }
+    await  ownerLogin(loginData)
+        .then(res => {
+          if (res.data === "fail") {
+            alert("Login failed");
+          } else {
+            const data = res.data
+            saveOwner(data.email)
+            dispatch(OwnerData(data))
+            navigate("/owner")
+          }
+        })
+        .catch(error => {
+          console.log(error);
+        });
+  };
+  
 
   return (
     <>

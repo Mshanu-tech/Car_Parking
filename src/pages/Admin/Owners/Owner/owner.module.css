@@ -1,0 +1,23 @@
+.aligncard{
+    display: flex;
+    flex-wrap: wrap;
+}
+h4{
+    font-weight: bold;
+    color: black;
+}
+.ownerProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ownerImage{
+    display: contents;
+}
+.ownerDetails{
+    font-weight: bold;
+    color: black;
+    display: contents;  
+    margin-top: 20px;
+}

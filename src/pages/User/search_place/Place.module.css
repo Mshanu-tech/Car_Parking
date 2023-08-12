@@ -1,0 +1,13 @@
+.search_time{
+    /* display:flex; */
+    /* width: 900px; */
+}
+.time_date{
+    margin-top:20px;
+    display: flex;
+    justify-content: space-evenly;
+    flex-wrap: wrap;
+}
+.alignCard{
+    margin-top: 20px;
+}

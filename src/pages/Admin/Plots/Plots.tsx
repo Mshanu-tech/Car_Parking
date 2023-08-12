@@ -3,6 +3,7 @@ import Form from 'react-bootstrap/Form';
 import css from './plot.module.css'
 import Nav from '../../../share/nav/Nav'
 import Image from 'react-bootstrap/Image';
+import Card from '../../../share/card/Card';
 import { useNavigate } from 'react-router-dom';
 
 // type Props = {}

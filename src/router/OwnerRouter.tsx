@@ -8,6 +8,7 @@ import PlotForm from '../pages/Owner/Plots/plot_form/PlotForm'
 import Users from '../pages/Owner/Users/User'
 import User from '../pages/Owner/Users/User/User'
 import Car from '../pages/Owner/Users/userCar/Car'
+import Profile from '../pages/Owner/Profile/Profile'
 
 // type Props = {}
 
@@ -23,6 +24,7 @@ const OwnerRouter:React.FC = () => {
       <Route path='/users' element={<Users/>}/>
       <Route path='/users/user' element={<User/>}/>
       <Route path='/users/user/car' element={<Car/>}/>
+      <Route path='/profile' element={<Profile/>}/>
     </Routes>
     </>
     )

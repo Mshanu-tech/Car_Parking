@@ -1,4 +1,16 @@
-.table {
+
+.main{
+    display: flex; 
+    align-items: center; 
+    flex-direction: column;
+}
+tr {
     border-style: solid;
     color: black;
+}
+th,td{
+    padding: 10px;
+}
+table{
+    margin-top: 27px;
 }

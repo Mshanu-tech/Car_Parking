@@ -12,7 +12,7 @@ const Car: React.FC = (props: Props) => {
             <Nav />
             <div className="container">
                 <div className='row'>
-                    <div style={{ display: "flex", alignItems: "center", flexDirection: "column" }}>
+                    <div className={css.main}>
                         <Col style={{ display: "contents" }} xs={6} md={4}>
                             <Image
                                 style={{ width: "23%" }}
@@ -25,18 +25,18 @@ const Car: React.FC = (props: Props) => {
                             <h6>Email:ajith@gmail.com</h6>
                             <h6>9873490234</h6>
                         </div>
-                        <table  style={{marginTop:"27px"}}>
-                            <tr className={css.table}>
-                            <th style={{padding:"10px"}}>CarNo</th>
-                            <th style={{padding:"10px"}}>Date</th>
-                            <th style={{padding:"10px"}}>Time</th>
-                            <th style={{padding:"10px"}}>Price</th>
+                        <table>
+                            <tr>
+                            <th>CarNo</th>
+                            <th>Date</th>
+                            <th>Time</th>
+                            <th >Price</th>
                             </tr>
-                            <tr className={css.table}>
-                            <td style={{padding:"10px"}}>KL07AU8945</td>
-                            <td style={{padding:"10px"}}>12/07/2023 ___ 13/07/2023</td>
-                            <td style={{padding:"10px"}}>10:00 PM ___ 10:00AM</td>
-                            <td style={{padding:"10px"}}>900</td>
+                            <tr>
+                            <td >KL07AU8945</td>
+                            <td >12/07/2023 ___ 13/07/2023</td>
+                            <td >10:00 PM ___ 10:00AM</td>
+                            <td >900</td>
                             </tr>
                         </table>
                     </div>

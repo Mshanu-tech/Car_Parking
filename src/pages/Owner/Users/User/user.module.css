@@ -1,0 +1,21 @@
+.user{
+  display: flex ;
+  justify-content: center; 
+  align-items: center; 
+  flex-direction: column;
+}
+.user_detail{
+  font-weight: bold;
+   color: black; 
+   display: contents;
+    margin-top: 20px;
+}
+.car_text{
+  color: black;
+  font-weight: bold;
+}
+.user_car{
+  display: flex;
+    flex-wrap: wrap;
+    justify-content: space-around;
+}

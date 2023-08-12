@@ -1,0 +1,52 @@
+.plot{
+    /* margin: 30px; */
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-between;
+    /* align-items: center; */
+}
+.plot_name{
+    margin: 30px;
+    margin-left: 50px;
+}
+
+.plot_image{
+    /* background: rgb(209, 102, 102); */
+    width: 100%;
+    height: 335px;
+    background-image: url('https://c8.alamy.com/comp/2J0W2YR/parked-cars-at-the-exit-in-a-large-underground-car-park-2J0W2YR.jpg');
+    background-size: cover;
+    background-position: center;
+}
+.plot_details{
+        width: 100%;
+        overflow: auto;
+        height: 200px;
+}
+.plot_details_h{
+    color: black;
+}
+.plot_details_p{
+    color: black;
+}
+.card{
+    /* margin-top: 10px; */
+    display: flex;
+    width: 300px;
+    height: 200px;
+    border-radius: 5px;
+    border: 1px solid red;
+    justify-content: space-evenly;
+    flex-direction: column;
+    align-items: center;
+    color: black;
+}
+.mincard{
+    width: 90%;
+    display: flex;
+    height: 40%;
+    border-radius: 5px;
+    border: 1px solid red;
+    justify-content: space-around;
+    align-items: center;
+}

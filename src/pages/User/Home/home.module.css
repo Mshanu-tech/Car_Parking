@@ -14,20 +14,10 @@ body{
 }
 .search{
     display: flex;
-    flex-wrap: nowrap;
-}
+    justify-content: space-evenly;
+    flex-wrap: wrap;}
 
-.search_button{
-    border-top-right-radius: 6px;
-    border-bottom-right-radius: 6px;
-    border: white;
-    width: 48px;
-}
 
-.search_input{
-    border-top-right-radius: 0px;
-    border-bottom-right-radius: 0px;
-}
 .time{
     border-radius: 3px;
     border: none;
@@ -39,6 +29,12 @@ body{
     border-radius: 3px;
     border: none;
 }
+.date_time{
+    display: flex;
+    justify-content: center;
+    padding-top: 20px;
+}
+
 .product_version{
     display: flex;
     justify-content: space-around;

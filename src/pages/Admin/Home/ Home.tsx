@@ -4,7 +4,7 @@ import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
 import EditIcon from '@mui/icons-material/Edit';
 import Image from 'react-bootstrap/Image';
-import Btn from '../../../components/button/Btn'
+// import Btn from '../../../components/button/Btn'
 import Offcanvas from 'react-bootstrap/Offcanvas';
 import Carousel from 'react-bootstrap/Carousel';
 import Nav from '../../../share/nav/Nav'
