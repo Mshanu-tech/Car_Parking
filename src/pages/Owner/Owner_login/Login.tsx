@@ -4,10 +4,10 @@ import style from './login.module.css';
 import { ownerLogin } from '../../../service/ownerApi';
 import {ownerSignup} from '../../../service/ownerApi';
 import {ADD} from '../../../components/createSlice/OwnerSignup'
-import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 import { saveOwner } from '../../../api/owner';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 
 // type Props = {};
 // props: Props
@@ -44,21 +44,22 @@ const Login: React.FC = () => {
     // }
   }
 
-  const handleLogin = async (e:any) => {
-    e.preventDefault();
-
+  const handleLogin = async () => {
     const loginData = {
       email,
       password,
     };
+  
+    // try {
 
+      // await axios.post("http://localhost:5000/owner/login", loginData)
     await  ownerLogin(loginData)
         .then(res => {
           if (res.data === "fail") {
             alert("Login failed");
           } else {
             const data = res.data
-            saveOwner(data.email)
+            saveOwner(data)
             dispatch(OwnerData(data))
             navigate("/owner")
           }
@@ -66,6 +67,9 @@ const Login: React.FC = () => {
         .catch(error => {
           console.log(error);
         });
+    // } catch (error) {
+    //   console.log(error);
+    // }
   };
   
 

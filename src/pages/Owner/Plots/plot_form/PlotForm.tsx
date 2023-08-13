@@ -5,13 +5,13 @@ import Row from 'react-bootstrap/Row';
 import Nav from '../../../../share/nav/Nav'
 import style from './form.module.css'
 import Btn from '../../../../components/button/Btn';
-import axios from 'axios';
+import { plotForm } from '../../../../service/ownerApi';
 
 // type Props = {}
 
 const PlotForm: React.FC = () => {
 
-  const [images, setImages] = useState<File[]>([]);
+  // const [images, setImages] = useState<File[]>([]);
 
   const [placename , setplacename]=useState('')
   const [hour , sethour]=useState('')
@@ -19,40 +19,16 @@ const PlotForm: React.FC = () => {
   const [month , setmonth]=useState('')
   const [location , setlocation]=useState('')
   const [plotdetails , setplotdetails]=useState('')
-  console.log(placename);
+  // console.log(placename);
   
 
   const handleForm = async (e: any) => {
-    e.preventDefault();
-
-    const formData = new FormData();
-    formData.append('placename', placename);
-    formData.append('hour', hour);
-    formData.append('day', day);
-    formData.append('month', month);
-    formData.append('location', location);
-    formData.append('plotdetails', plotdetails);
-
-    // Append the selected images to the formData
-    images.forEach((image, index) => {
-      formData.append(`plotimage-${index}`, image);
-    });
-
-    try {
-      console.log("dijeidjeoidjioqjdeoi",formData);
-      await axios.post('http://localhost:5000/owner/plots', formData, {
-        headers: { 'Content-Type': 'multipart/form-data' },
-      });
-    } catch (error) {
-      console.log(error);
+    e.preventDefault()
+    const formData = {
+      placename,hour,day,month,location,plotdetails
     }
-  };
+    plotForm(formData)
 
-  const handleImageChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    if (e.target.files) {
-      const selectedImages = Array.from(e.target.files);
-      setImages(selectedImages);
-    }
   };
   return (
     <>

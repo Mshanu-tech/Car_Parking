@@ -4,6 +4,7 @@ import Nav from "../../../share/nav/Nav";
 // import { isLoggedin } from "../../../api/owner";
 import style from './owner_home.module.css';
 import axios from "axios";
+import { getPlots } from "../../../service/ownerApi";
 
 type Props = {};
 
@@ -11,6 +12,15 @@ const OwnerHome = (props: Props) => {
     const navigate = useNavigate();
     
     const handlePlot = () => {
+        getPlots()
+        .then(res=>{
+            if (res.data === "fail") {
+                alert("Data not get")
+            }else{
+               const data = res.data
+                              
+            }
+        })
         navigate('plots');
     }
 
