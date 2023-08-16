@@ -9,7 +9,7 @@ const Home: React.FC = () => {
 
   const HandleSearch = () =>{
     navigate('/Place')
-    console.log("hello");
+    // console.log("hello");
   }
   return (
     <>

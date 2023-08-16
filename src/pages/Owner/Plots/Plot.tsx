@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import Form from 'react-bootstrap/Form';
 import css from './plot.module.css'
 import Nav from '../../../share/nav/Nav'
@@ -6,11 +6,30 @@ import Image from 'react-bootstrap/Image';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
+import { getPlots} from '../../../service/ownerApi';
 import { useNavigate } from 'react-router-dom';
 
-// type Props = {}
 
 const Plot: React.FC = () => {
+
+  const[Data, setData]=useState([])
+
+  useEffect(()=>{
+    console.log("hello");
+    
+    getPlots()
+    .then((res) => {
+      if (res.data === 'fail') {
+        alert('Data not get');
+      } else {
+        var plotData = res.data.data.plots;
+        console.log(plotData);
+        setData(plotData);
+      }
+    });
+  },[])
+  
+
   const navigate = useNavigate()
   const HandleSearch = () => {
 
@@ -19,7 +38,7 @@ const Plot: React.FC = () => {
     console.log("sucess");
     navigate('plotform')
   }
-  const handleplot = () =>{
+  const handleplot = () => {
     navigate('plot')
   }
   return (
@@ -34,63 +53,41 @@ const Plot: React.FC = () => {
           />
           <button onClick={HandleSearch} className={css.search_button}><i style={{ paddingTop: "7px" }} className='bx bx-search bx-sm'></i></button>
           <Box width='auto'>
-            <Fab style={{width:"50px",height:"50px"}} onClick={AddPlot} color="primary" aria-label="add">
-              <AddIcon  />
+            <Fab style={{ width: "50px", height: "50px" }} onClick={AddPlot} color="primary" aria-label="add">
+              <AddIcon />
             </Fab>
           </Box>
           <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
-                        <div onClick={handleplot} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-                            <Image
-                                style={{ width: "34%" }}
-                                src="https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg"
-                                rounded
-                            />
-                            <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
-                                <h6>Phone: 9898539845</h6>
-                                <h6>Email: ajith123@gmail.com</h6>
-                            </div>
-                        </div>
-                        <div className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-                            <Image
-                                style={{ width: "34%" }}
-                                src="https://st2.depositphotos.com/7149852/43935/i/600/depositphotos_439359610-stock-photo-top-aerial-view-many-cars.jpg"
-                                rounded
-                            />
-                            <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
-                                <h6>Phone: 9898539845</h6>
-                                <h6>Email: ajith123@gmail.com</h6>
-                            </div>
-                        </div>
-                    </div>
-                    <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
-                        <div  className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-                            <Image
-                                style={{ width: "34%" }}
-                                src="https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg"
-                                rounded
-                            />
-                            <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
-                                <h6>Phone: 9898539845</h6>
-                                <h6>Email: ajith123@gmail.com</h6>
-                            </div>
-                        </div>
-                        <div className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-                            <Image
-                                style={{ width: "34%" }}
-                                src="https://st2.depositphotos.com/7149852/43935/i/600/depositphotos_439359610-stock-photo-top-aerial-view-many-cars.jpg"
-                                rounded
-                            />
-                            <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
-                                <h6>Phone: 9898539845</h6>
-                                <h6>Email: ajith123@gmail.com</h6>
-                            </div>
-                        </div>
-                    </div>
-                    
+            <div onClick={handleplot} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
+              <Image
+                style={{ width: "34%" }}
+                src="https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg"
+                rounded
+              />
+              <div style={{ padding: "10px" }} className="cardname">
+                <h6>Name: Ajith</h6>
+                <h6>Phone: 9898539845</h6>
+                <h6>Email: ajith123@gmail.com</h6>
+              </div>
+            </div>
+            {Data.map((plot: any, index: number) => (
+              <div
+                key={index}
+                className={`card ${css.responsiveCard}`}
+                style={{ marginTop: '35px' }}
+              >
+                <Image
+                  style={{ width: '34%' }}
+                  rounded
+                />
+                <div style={{ padding: '10px' }} className="cardname">
+                  <h6>Name: {plot.placename}</h6>
+                  <h6>hour: {plot.hour}</h6>
+                  <h6>day: {plot.day}</h6>
+                </div>
+              </div>
+            ))}
+          </div>
         </div>
       </div>
     </>

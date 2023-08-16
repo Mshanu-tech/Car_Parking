@@ -1,12 +1,7 @@
 import { createSlice } from "@reduxjs/toolkit";
 
 const initialState={
-    plotName:"",
-    hour:0,
-    day:0,
-    month:0,
-    plotDetails:"",
-    location:""
+    plots:[]
 }
 
 const plotSlice = createSlice({
@@ -14,10 +9,10 @@ const plotSlice = createSlice({
     initialState,
     reducers:{
         ADD:(state, action)=>{
-            state.plotName = action.payload
-            state.hour = action.payload
-            state.day = action.payload
-            state.location = action.payload
+            state.plots = action.payload
         }
     }
 })
+
+export default plotSlice.reducer
+export const{ADD}=plotSlice.actions

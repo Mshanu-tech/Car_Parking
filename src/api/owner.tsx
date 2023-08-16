@@ -9,8 +9,8 @@ const saveOwner = (data: any) => {
     } catch {
       return false;
     }
-  };
-
+  }
+  
   const isLogout = () =>{
     localStorage.removeItem('owner')
   }

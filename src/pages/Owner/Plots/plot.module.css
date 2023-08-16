@@ -3,7 +3,7 @@
     background-position: center;
     background-size: cover;
     background-repeat: no-repeat;
-    background-image: url('https://cdn.pixabay.com/photo/2016/11/18/13/20/brick-wall-1834446_1280.jpg');
+    /* background-image: url('https://cdn.pixabay.com/photo/2016/11/18/13/20/brick-wall-1834446_1280.jpg'); */
 }
 .search{
     display: flex;
