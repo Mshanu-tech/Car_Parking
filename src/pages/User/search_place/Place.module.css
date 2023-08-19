@@ -3,14 +3,21 @@
     /* width: 900px; */
 }
 .time_date{
-    margin-top:20px;
-    display: flex;
-    justify-content: space-evenly;
-    flex-wrap: wrap;
+  margin-top: 20px;
+  display: flex;
+  justify-content: space-evenly;
+  flex-wrap: nowrap;
 }
 .alignCard{
-    margin-top: 20px;
-    display: inline;
+    /* margin-top: 20px; */
+    /* background-color: aquamarine; */
+    width: 50%;
+    height: 300px;
+}
+.leftSide{
+  background-color: rgb(0, 0, 0);
+  width: 50%;
+  height: 300px;
 }
 .responsiveCard {
     width: 100%;
@@ -33,5 +40,5 @@
     width: 32%;
   }
   .cardname{
-    padding: 10px;
+    /* padding: 10px; */
   }
