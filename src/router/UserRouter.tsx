@@ -6,6 +6,7 @@ import Place from '../pages/User/search_place/Place'
 import Plot from '../pages/User/Plot/Plot'
 import Form from '../pages/User/Booking_Form/Form'
 import Card from '../pages/User/card/Card'
+import ImageUpload from '../pages/image'
 
 type Props = {}
 
@@ -19,6 +20,8 @@ const UserRouter:React.FC<Props> = () => {
         <Route path='plot' element={<Plot/>}/>
         <Route path='form' element={<Form/>}/>
         <Route path='card' element={<Card/>}/>
+        <Route path='image' element={<ImageUpload/>}/>
+
     </Routes>
     </>
     )

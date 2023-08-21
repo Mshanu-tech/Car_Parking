@@ -52,6 +52,7 @@ const Place: React.FC = () => {
           <div className={style.alignCard}>
             {Data.map((e: any, index: number) => (
               <div
+              onDoubleClick={handleCard}
                 onClick={() => handleLocation(e._id)}
                 key={index}
                 className={`card col-12 ${style.responsiveCard}`}
@@ -71,7 +72,11 @@ const Place: React.FC = () => {
                 </div>               </div>
             ))}
           </div>
-          <div className={style.leftSide}>
+
+          {/* map */}
+
+
+          {/* <div className={style.leftSide}>
             {selectedCardId ? (
               Data.map((e: any) => (
                 <div
@@ -101,7 +106,11 @@ const Place: React.FC = () => {
                 referrerPolicy="no-referrer-when-downgrade"
               ></iframe>
             )}
-          </div>
+          </div> */}
+
+
+          {/* map */}
+
         </div>
       </div>
     </div>

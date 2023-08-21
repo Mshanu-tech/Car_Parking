@@ -3,6 +3,7 @@ import OwnerLogin from "../components/createSlice/OwnerLogin";
 import SignupSlice from "../components/createSlice/OwnerSignup";
 import { configureStore } from "@reduxjs/toolkit";
 import plotSlice from "../components/createSlice/plotSlice";
+// import { uploadimage } from "../components/createSlice/uploadImage";
 
 const store = configureStore({
     reducer:{
@@ -10,6 +11,7 @@ const store = configureStore({
         signup:SignupSlice,
         login:OwnerLogin,
         plots:plotSlice,
+        // image:uploadimage
     }
 })
 export default store

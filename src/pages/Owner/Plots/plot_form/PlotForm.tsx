@@ -1,20 +1,18 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
 import Nav from '../../../../share/nav/Nav'
 import style from './form.module.css'
 import Btn from '../../../../components/button/Btn';
-import { plotForm } from '../../../../service/ownerApi';
-import { useNavigate } from 'react-router-dom';
-
-// type Props = {}
+// import { plotForm } from '../../../../service/ownerApi';
+import { uploadImage } from '../../../../images/uploadImage';
+// import { useNavigate } from 'react-router-dom';
+// import { useDispatch } from 'react-redux';
 
 const PlotForm: React.FC = () => {
 
-  const navigate = useNavigate()
-
-  // const [images, setImages] = useState<File[]>([]);
+  // const navigate = useNavigate()
 
   const [placename , setPlotname]=useState('')
   const [center , setCenter]=useState('')
@@ -23,17 +21,22 @@ const PlotForm: React.FC = () => {
   const [month , setMonth]=useState('')
   const [location, setlocation]=useState('')
   const [plotdetails , setPlotdetails]=useState('')
-  // console.log(placename);
-  
-
+  const [image, setimage] = useState(null)  
+  // const folder :"img/"
   const handleForm =  (e: any) => {
     e.preventDefault()
+
+    uploadImage("img/", image, () => {
+      alert("Image uploaded successfully!");
+  });
+
     const formData = {
       center,placename,hour,day,month,location,plotdetails
     }
     console.log(formData);
-   plotForm(formData)
-   navigate('/owner')
+  //  plotForm(formData)
+
+  //  navigate('/owner')
   }
 
 
@@ -81,7 +84,7 @@ const PlotForm: React.FC = () => {
           <Row className="mb-3">
             <Form.Group >
               <Form.Label>Plot Image</Form.Label>
-              <Form.Control type="file" placeholder="image" required />
+              <Form.Control onChange={(e:any)=>{setimage(e.target.files[0])}} type="file" placeholder="image" required />
             </Form.Group>
             {/* <Form.Group as={Col} md="4">
             <Form.Label>Features</Form.Label>

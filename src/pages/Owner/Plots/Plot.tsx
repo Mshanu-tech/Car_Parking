@@ -8,14 +8,24 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { getPlots} from '../../../service/ownerApi';
 import { useNavigate } from 'react-router-dom';
+import { fetchImageURLs } from '../../../images/downloadIamge';
 
 
 const Plot: React.FC = () => {
 
   const[Data, setData]=useState([])
+  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  console.log(imageURLs);
+  
 
   useEffect(()=>{
-    console.log("hello");
+    fetchImageURLs('plotImage/')
+      .then((urls) => {
+        setImageURLs(urls);
+      })
+      .catch((error) => {
+        console.error('Error fetching image URLs:', error);
+      });
     
     getPlots()
     .then((res) => {
@@ -23,7 +33,7 @@ const Plot: React.FC = () => {
         alert('Data not get');
       } else {
         var plotData = res.data.data.plots;
-        console.log(plotData);
+        // console.log(plotData);
         setData(plotData);
       }
     });
@@ -35,7 +45,7 @@ const Plot: React.FC = () => {
 
   }
   const AddPlot = () => {
-    console.log("sucess");
+    // console.log("sucess");
     navigate('plotform')
   }
   const handleplot = () => {
@@ -77,6 +87,7 @@ const Plot: React.FC = () => {
                 style={{ marginTop: '35px' }}
               >
                 <Image
+                src={imageURLs[index]}
                   style={{ width: '34%' }}
                   rounded
                 />
