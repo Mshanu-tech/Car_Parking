@@ -8,6 +8,7 @@ export const uploadImage = (folder:string,image: File, callback: () => void) => 
     }
 
     const imageRef = ref(storage, `${folder}${image.name}`);
+    
     uploadBytes(imageRef, image)
         .then(() => {
             console.log("Image uploaded successfully!");

@@ -5,7 +5,7 @@ import Row from 'react-bootstrap/Row';
 import Nav from '../../../../share/nav/Nav'
 import style from './form.module.css'
 import Btn from '../../../../components/button/Btn';
-// import { plotForm } from '../../../../service/ownerApi';
+import { plotForm } from '../../../../service/ownerApi';
 import { uploadImage } from '../../../../images/uploadImage';
 // import { useNavigate } from 'react-router-dom';
 // import { useDispatch } from 'react-redux';
@@ -29,12 +29,12 @@ const PlotForm: React.FC = () => {
     uploadImage("img/", image, () => {
       alert("Image uploaded successfully!");
   });
-
+  const Image = image.name
     const formData = {
-      center,placename,hour,day,month,location,plotdetails
+      center,placename,hour,day,month,location,plotdetails,Image
     }
-    console.log(formData);
-  //  plotForm(formData)
+    // console.log(image.name);
+   plotForm(formData)
 
   //  navigate('/owner')
   }

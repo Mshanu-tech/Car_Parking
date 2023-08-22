@@ -6,51 +6,54 @@ import Image from 'react-bootstrap/Image';
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
-import { getPlots} from '../../../service/ownerApi';
+import { getPlots } from '../../../service/ownerApi';
 import { useNavigate } from 'react-router-dom';
 import { fetchImageURLs } from '../../../images/downloadIamge';
+import { Link } from 'react-router-dom';
+// import Plot from './Plot/Plot';
 
 
-const Plot: React.FC = () => {
+const Plots: React.FC = () => {
 
-  const[Data, setData]=useState([])
+  const [Data, setData] = useState([])
   const [imageURLs, setImageURLs] = useState<string[]>([]);
-  console.log(imageURLs);
-  
 
-  useEffect(()=>{
-    fetchImageURLs('plotImage/')
+  useEffect(() => {
+
+    fetchImageURLs('img/')
       .then((urls) => {
+        // console.log(imageURLs.name);
         setImageURLs(urls);
       })
       .catch((error) => {
         console.error('Error fetching image URLs:', error);
       });
-    
+
     getPlots()
-    .then((res) => {
-      if (res.data === 'fail') {
-        alert('Data not get');
-      } else {
-        var plotData = res.data.data.plots;
-        // console.log(plotData);
-        setData(plotData);
-      }
-    });
-  },[])
-  
+      .then((res) => {
+        if (res.data === 'fail') {
+          alert('Data not get');
+        } else {
+          var plotData = res.data.data.plots;
+          // console.log(plotData);
+          setData(plotData);
+        }
+      });
+  }, [])
+
 
   const navigate = useNavigate()
   const HandleSearch = () => {
 
   }
   const AddPlot = () => {
-    // console.log("sucess");
-    navigate('plotform')
+    navigate(`plotform`)
   }
-  const handleplot = () => {
-    navigate('plot')
-  }
+  // const handleplot = (id:any) => {
+  //   console.log("pass id",id);
+    // Plot(e)
+  //   navigate(`plot${id}`)
+  // }
   return (
     <>
       <div className={css.plot_image}>
@@ -68,41 +71,25 @@ const Plot: React.FC = () => {
             </Fab>
           </Box>
           <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
-            <div onClick={handleplot} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-              <Image
-                style={{ width: "34%" }}
-                src="https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg"
-                rounded
-              />
-              <div style={{ padding: "10px" }} className="cardname">
-                <h6>Name: Ajith</h6>
-                <h6>Phone: 9898539845</h6>
-                <h6>Email: ajith123@gmail.com</h6>
-              </div>
+        {Data.map((plot: any, index: number) => (
+          <Link to={`plot/${plot._id}`} key={index} className={`card ${css.responsiveCard}`} style={{ marginTop: '35px' }}>
+            <Image
+              src={imageURLs[index]?.url}
+              style={{ width: '34%' }}
+              rounded
+            />
+            <div style={{ padding: '10px' }} className="cardname">
+              <h6>Name: {plot.placename}</h6>
+              <h6>hour: {plot.hour}</h6>
+              <h6>day: {plot.day}</h6>
             </div>
-            {Data.map((plot: any, index: number) => (
-              <div
-                key={index}
-                className={`card ${css.responsiveCard}`}
-                style={{ marginTop: '35px' }}
-              >
-                <Image
-                src={imageURLs[index]}
-                  style={{ width: '34%' }}
-                  rounded
-                />
-                <div style={{ padding: '10px' }} className="cardname">
-                  <h6>Name: {plot.placename}</h6>
-                  <h6>hour: {plot.hour}</h6>
-                  <h6>day: {plot.day}</h6>
-                </div>
-              </div>
-            ))}
-          </div>
+          </Link>
+        ))}
+      </div>
         </div>
       </div>
     </>
   )
 }
 
-export default Plot
+export default Plots
