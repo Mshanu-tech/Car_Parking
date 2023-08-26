@@ -1,12 +1,12 @@
 import { useNavigate, useParams } from 'react-router-dom';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
-import { editPlot, getPlot } from '../../../../service/ownerApi';
+import { deletePlot, editPlot, getPlot } from '../../../../service/ownerApi';
 import Nav from '../../../../share/nav/Nav';
 import Btn from '../../../../components/button/Btn';
 import  { useEffect, useState } from 'react';
 import EditForm from '../../../../components/Modals/EditFormModal';
-// import { fetchImageURLs } from '../../../../images/downloadIamge';
+import { fetchImageURLs } from '../../../../images/downloadIamge';
 
 const Plot = ()=> {
   
@@ -36,23 +36,30 @@ const Plot = ()=> {
       });
 
 
-    // fetchImageURLs('img/')
-    //   .then((url) => {
-    //     setImageURLs(url);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching image URLs:', error);
-    //   });
+    fetchImageURLs('img/')
+      .then((url) => {
+        setImageURLs(url);
+      })
+      .catch((error) => {
+        console.error('Error fetching image URLs:', error);
+      });
   }, []);
 
-  // const url = imageURLs.find((image) => image.name === Data.images);
-  // console.log(url);
+  const url = imageURLs.find((image) => image.name === Data.images);
+  console.log(url);
 
 
   const handleDelete = () => {
-
+    
+    deletePlot(id)
+    .then((res)=>{
+      if(res.data === 'deleted') {
+        navigate('/owner/plots')
+      }else{
+        alert("not deleted")
+      }
+    })
   }
-  // console.log(Data);
 
 
   return (
@@ -64,7 +71,7 @@ const Plot = ()=> {
             <Col style={{ display: "contents" }} xs={6} md={4}>
               <Image
                 style={{ width: "40%" }}
-                // src={url.url}F
+                // src={url.url}
                 rounded
               />
             </Col>
@@ -90,9 +97,9 @@ const Plot = ()=> {
                 </thead>
                 <tbody>
                   <tr>
-                    <td>1</td>
-                    <td>2</td>
-                    <td>45</td>
+                    <td> {Data.hour} </td>
+                    <td>{Data.day}</td>
+                    <td>{Data.month}</td>
                   </tr>
                 </tbody>
               </table>

@@ -15,9 +15,11 @@ export const getPlots = async () => {
     return await axiosInstance('JwtToken').get("/owner/plots")    
 }
 export const getPlot = async (id:string) => {
-    // console.log(id);
     return await axiosInstance('JwtToken').get(`/owner/plot/${id}`);
 }
 export const editPlot = async (value: any) => {
     return await axiosInstance('JwtToken').put("/owner/plot", {...value})
+}
+export const deletePlot = async (id:string) => {
+    return await axiosInstance('JwtToken').delete(`/owner/plot/${id}`);
 }

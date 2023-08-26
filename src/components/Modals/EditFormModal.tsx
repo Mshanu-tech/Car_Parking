@@ -12,10 +12,11 @@ interface Props {
 const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
   const [editedData, setEditedData] = useState({ ...Data });
+  // const [image, setimage] = useState(null)  
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
-    setEditedData({ ...Data }); 
+    setEditedData({ ...Data });
     setShow(true);
   };
 
@@ -29,7 +30,7 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
 
   const handleData = () => {
     updateData(editedData);
-    handleClose(); 
+    handleClose();
   };
 
   return (

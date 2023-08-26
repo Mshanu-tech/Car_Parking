@@ -4,7 +4,7 @@ const axiosInstance = (tokenName: any) => {
     // console.log("hdasiudhauidhs", import.meta.env.VITE_SERVER_URL);
 
     const instance = axios.create({
-        baseURL: "http://127.0.0.1:5000",
+        baseURL: "http://127.0.0.1:5500",
         timeout: 5000,  
         headers: {
             'Content-Type': 'application/json'
