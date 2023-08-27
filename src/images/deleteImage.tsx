@@ -1,15 +1,30 @@
-import { getStorage, ref, deleteObject } from "firebase/storage";
+import React from 'react';
+import Button from 'react-bootstrap/Button';
+import { storage } from '../Firebase/firebase';
+import { ref, deleteObject } from 'firebase/storage';
 
-const storage = getStorage();
+interface DeleteImageProps {
+  imagePath: string;
+  onDeleteSuccess: () => void;
+}
 
-// Create a reference to the file to delete
-const desertRef = ref(storage, 'img/1920x1080-px-colorful-coral-sea-underwater-water-animals-birds-hd-art-wallpaper-thumb.jpg');
+const DeleteImage: React.FC<DeleteImageProps> = ({ imagePath, onDeleteSuccess }) => {
 
-// Delete the file
-deleteObject(desertRef).then(() => {
-    console.log("deleted");
-    
-}).catch((error) => {
-    console.log("not delete");
-    
-});
+  const imageRef = ref(storage, imagePath);
+
+  const handleDeleteImage = async () => {
+    try {
+      await deleteObject(imageRef);
+      console.log('Image deleted successfully.');
+      onDeleteSuccess(); // Call the prop function to indicate successful deletion
+    } catch (error) {
+      console.error('Error deleting image:', error);
+    }
+  };
+
+  return (
+    <Button variant='outline-danger' onClick={handleDeleteImage}>Delete</Button>
+  );
+};
+
+export default DeleteImage;

@@ -1,26 +1,24 @@
-import { useNavigate, useParams } from 'react-router-dom';
+import React, { useEffect, useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
 import { deletePlot, editPlot, getPlot } from '../../../../service/ownerApi';
 import Nav from '../../../../share/nav/Nav';
-import Btn from '../../../../components/button/Btn';
-import  { useEffect, useState } from 'react';
 import EditForm from '../../../../components/Modals/EditFormModal';
 import { fetchImageURLs } from '../../../../images/downloadIamge';
+import { useNavigate, useParams } from 'react-router-dom';
+import DeleteImage from '../../../../images/deleteImage'; 
 
-const Plot = ()=> {
-  
+const Plot: React.FC = () => {
   const [Data, setData] = useState({});
-  const navigate = useNavigate()
+  const navigator = useNavigate()
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const { id } = useParams<{ id: string }>();
 
-  const updateData = (updatedData:any) => {
+  const updateData = (updatedData: any) => {
     setData(updatedData);
     console.log(Data);
-    editPlot(updatedData)
+    editPlot(updatedData);
   };
-  
 
   useEffect(() => {
     getPlot(id)
@@ -29,12 +27,10 @@ const Plot = ()=> {
           alert('Data not get');
         } else {
           var plotData = res.data;
-          console.log("Data get");
-          // console.log(plotData);
+          console.log('Data get');
           setData(plotData);
         }
       });
-
 
     fetchImageURLs('img/')
       .then((url) => {
@@ -43,24 +39,20 @@ const Plot = ()=> {
       .catch((error) => {
         console.error('Error fetching image URLs:', error);
       });
-  }, []);
+  }, [id]);
 
-  const url = imageURLs.find((image) => image.name === Data.images);
-  console.log(url);
-
+  const image = imageURLs.find((img) => img.name === Data.images);
 
   const handleDelete = () => {
-    
     deletePlot(id)
-    .then((res)=>{
-      if(res.data === 'deleted') {
-        navigate('/owner/plots')
-      }else{
-        alert("not deleted")
-      }
-    })
-  }
-
+      .then((res) => {
+        if (res.data === 'deleted') {
+          navigator('/owner/plots')
+        } else {
+          alert('Plot not deleted');
+        }
+      });
+  };
 
   return (
     <>
@@ -71,18 +63,17 @@ const Plot = ()=> {
             <Col style={{ display: "contents" }} xs={6} md={4}>
               <Image
                 style={{ width: "40%" }}
-                // src={url.url}
+                src={image?.url} 
                 rounded
               />
             </Col>
             <div style={{ color: "black", display: "contents" }}>
               <div style={{ display: "flex" }}>
                 <div style={{ margin: "20px" }}>
-                <EditForm Data={Data} updateData={updateData} btnName='EDIT' btnColor='outline-success' />
-
+                  <EditForm Data={Data} updateData={updateData} btnName='EDIT' btnColor='outline-success' />
                 </div>
                 <div style={{ margin: "20px" }}>
-                  <Btn buttonhandler={handleDelete} Btnname='DELETE' color='outline-danger' />
+                <DeleteImage imagePath={`img/${Data.images}`} onDeleteSuccess={handleDelete} />
                 </div>
               </div>
               <h5 style={{ fontWeight: "bold" }}>Center Name : {Data.center}</h5>
@@ -103,7 +94,6 @@ const Plot = ()=> {
                   </tr>
                 </tbody>
               </table>
-
               <p> {Data.plotdetails} </p>
             </div>
           </div>

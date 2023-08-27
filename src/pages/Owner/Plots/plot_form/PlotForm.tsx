@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import React, { useState } from 'react'
 import Col from 'react-bootstrap/Col';
 import Form from 'react-bootstrap/Form';
 import Row from 'react-bootstrap/Row';
@@ -7,12 +7,12 @@ import style from './form.module.css'
 import Btn from '../../../../components/button/Btn';
 import { plotForm } from '../../../../service/ownerApi';
 import { uploadImage } from '../../../../images/uploadImage';
-// import { useNavigate } from 'react-router-dom';
-// import { useDispatch } from 'react-redux';
+import { useNavigate } from 'react-router-dom';
+
 
 const PlotForm: React.FC = () => {
 
-  // const navigate = useNavigate()
+  const navigate = useNavigate()
 
   const [placename , setPlotname]=useState('')
   const [center , setCenter]=useState('')
@@ -36,7 +36,7 @@ const PlotForm: React.FC = () => {
     // console.log(image.name);
    plotForm(formData)
 
-  //  navigate('/owner')
+   navigate('/owner/plots')
   }
 
 
@@ -60,19 +60,11 @@ const PlotForm: React.FC = () => {
             </Form.Group>
           </Row>
           <Row  style={{display:"flex",justifyContent:"center"}} className={`mb-3`}>
-            {/* <div style={{ display: "flex", alignItems: "flex-end" }}> */}
             <Form.Group>
             <Form.Label>Price</Form.Label>
-            {/* <Form.Group as={Col} sm="2" md="2"> */}
               <Form.Control onChange={(e)=>setHour(e.target.value)} type="text" placeholder='Hour' required />
-            {/* </Form.Group> */}
-            {/* <Form.Group as={Col} sm="2" md="2"> */}
-              {/* <Form.Label>1Day</Form.Label> */}
               <Form.Control onChange={(e)=>setDay(e.target.value)} type="text" placeholder='Day' required />
-            {/* </Form.Group> */}
-            {/* <Form.Group as={Col} sm="3" md="2"> */}
               <Form.Control onChange={(e)=>setMonth(e.target.value)} type="text" placeholder="Month" required />
-            {/* </Form.Group> */}
             </Form.Group>
           </Row>
           <Row className="mb-3">
