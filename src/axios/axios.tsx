@@ -22,7 +22,6 @@ const axiosInstance = (tokenName: any) => {
     instance.interceptors.response.use(response => response,
         error => Promise.reject(error.response.data)
     )
-
     return instance;
 }
 

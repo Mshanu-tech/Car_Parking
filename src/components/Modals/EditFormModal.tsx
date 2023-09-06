@@ -11,8 +11,8 @@ interface Props {
 
 const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
+  const [newImage, setNewImage] = useState<null | File>(null);
   const [editedData, setEditedData] = useState({ ...Data });
-  // const [image, setimage] = useState(null)  
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -21,15 +21,23 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   };
 
   const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const { name, value } = event.target;
+    const { name, value, type } = event.target;
+
+    if (type === 'file') {
+      const file = event.target.files[0];      
+      setNewImage(file);
+      console.log(newImage);
+
+    }else{
     setEditedData((prevData) => ({
       ...prevData,
       [name]: value,
     }));
+  }
   };
 
   const handleData = () => {
-    updateData(editedData);
+    updateData(editedData,newImage);
     handleClose();
   };
 
@@ -81,6 +89,11 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
             type="text"
             name="month"
             defaultValue={Data.month}
+          />
+          <input
+            onChange={handleInputChange}
+            type="file"
+            name="images"
           />
           <p>Plot Details</p>
           <input

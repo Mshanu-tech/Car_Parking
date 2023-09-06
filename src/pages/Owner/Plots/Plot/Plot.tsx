@@ -1,24 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
-import { deletePlot, editPlot, getPlot } from '../../../../service/ownerApi';
+import { deletePlot, getPlot } from '../../../../service/ownerApi';
 import Nav from '../../../../share/nav/Nav';
 import EditForm from '../../../../components/Modals/EditFormModal';
-import { fetchImageURLs } from '../../../../images/downloadIamge';
+import { fetchImageURLs } from '../../../../images/downloadImage';
 import { useNavigate, useParams } from 'react-router-dom';
-import DeleteImage from '../../../../images/deleteImage'; 
+import DeleteImage from '../../../../images/deleteImage';
+import { updateImage } from '../../../../images/updateImage';
+import { v4 as uuidv4 } from 'uuid';
 
 const Plot: React.FC = () => {
   const [Data, setData] = useState({});
   const navigator = useNavigate()
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const { id } = useParams<{ id: string }>();
-
-  const updateData = (updatedData: any) => {
-    setData(updatedData);
-    console.log(Data);
-    editPlot(updatedData);
-  };
 
   useEffect(() => {
     getPlot(id)
@@ -27,7 +23,6 @@ const Plot: React.FC = () => {
           alert('Data not get');
         } else {
           var plotData = res.data;
-          console.log('Data get');
           setData(plotData);
         }
       });
@@ -54,6 +49,16 @@ const Plot: React.FC = () => {
       });
   };
 
+  const updateData = (updatedData: any, newImage: File | null) => {
+    setData(updatedData);
+    if (newImage !== null) {
+      const uniqueImageName = `${uuidv4()}.${newImage.name.split('.').pop()}`;
+      updateImage("img/", Data.images, newImage, uniqueImageName, () => {
+        console.log("Image updated successfully!");
+      });
+    }
+  };
+
   return (
     <>
       <Nav />
@@ -63,7 +68,7 @@ const Plot: React.FC = () => {
             <Col style={{ display: "contents" }} xs={6} md={4}>
               <Image
                 style={{ width: "40%" }}
-                src={image?.url} 
+                src={image?.url}
                 rounded
               />
             </Col>
@@ -73,7 +78,7 @@ const Plot: React.FC = () => {
                   <EditForm Data={Data} updateData={updateData} btnName='EDIT' btnColor='outline-success' />
                 </div>
                 <div style={{ margin: "20px" }}>
-                <DeleteImage imagePath={`img/${Data.images}`} onDeleteSuccess={handleDelete} />
+                  <DeleteImage imagePath={`img/${Data.images}`} onDeleteSuccess={handleDelete} />
                 </div>
               </div>
               <h5 style={{ fontWeight: "bold" }}>Center Name : {Data.center}</h5>
