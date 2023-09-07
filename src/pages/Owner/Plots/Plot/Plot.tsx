@@ -1,14 +1,12 @@
 import React, { useEffect, useState } from 'react';
 import Image from 'react-bootstrap/Image';
 import Col from 'react-bootstrap/Col';
-import { deletePlot, getPlot } from '../../../../service/ownerApi';
+import { deletePlot, editPlot, getPlot } from '../../../../service/ownerApi';
 import Nav from '../../../../share/nav/Nav';
 import EditForm from '../../../../components/Modals/EditFormModal';
-import { fetchImageURLs } from '../../../../images/downloadImage';
+import { fetchImageURLs } from '../../../../images/downloadIamge';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteImage from '../../../../images/deleteImage';
-import { updateImage } from '../../../../images/updateImage';
-import { v4 as uuidv4 } from 'uuid';
 
 const Plot: React.FC = () => {
   const [Data, setData] = useState({});
@@ -49,14 +47,10 @@ const Plot: React.FC = () => {
       });
   };
 
-  const updateData = (updatedData: any, newImage: File | null) => {
+  const updateData = (updatedData: any) => {
     setData(updatedData);
-    if (newImage !== null) {
-      const uniqueImageName = `${uuidv4()}.${newImage.name.split('.').pop()}`;
-      updateImage("img/", Data.images, newImage, uniqueImageName, () => {
-        console.log("Image updated successfully!");
-      });
-    }
+    console.log(updatedData);
+    editPlot(updatedData)
   };
 
   return (

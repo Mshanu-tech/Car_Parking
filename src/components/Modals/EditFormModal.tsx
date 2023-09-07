@@ -1,6 +1,8 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { updateImage } from '../../images/updateImage';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
   btnName: string;
@@ -11,8 +13,8 @@ interface Props {
 
 const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
-  const [newImage, setNewImage] = useState<null | File>(null);
   const [editedData, setEditedData] = useState({ ...Data });
+  const [uploadedImageName, setUploadedImageName] = useState('');
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -20,24 +22,38 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
     setShow(true);
   };
 
-  const handleInputChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = event.target;
 
     if (type === 'file') {
-      const file = event.target.files[0];      
-      setNewImage(file);
-      console.log(newImage);
-
-    }else{
-    setEditedData((prevData) => ({
-      ...prevData,
-      [name]: value,
-    }));
-  }
+      const file = event.target.files[0];
+      if (file) {
+        const uniqueImageName = `${uuidv4()}.${file.name.split('.').pop()}`;
+        await updateImage("img/", `img/${Data.images}`, file, uniqueImageName, () => {
+          console.log("Image updated successfully!");
+          setUploadedImageName(uniqueImageName); // Store the unique image name
+        });
+      }
+    } else {
+      setEditedData((prevData: any) => ({
+        ...prevData,
+        [name]: value,
+      }));
+    }
   };
 
   const handleData = () => {
-    updateData(editedData,newImage);
+    // If a new image was uploaded, update the editedData with the uploadedImageName
+    if (uploadedImageName) {
+      setEditedData((prevData: any) => ({
+        ...prevData,
+        images: uploadedImageName,
+      }));
+    }
+    updateData(editedData);
+    console.log(uploadedImageName);
+    
+    console.log( editedData,"sdfiusfahj");
     handleClose();
   };
 
