@@ -48,7 +48,7 @@ const Plot: React.FC = () => {
   };
 
   const updateData = (updatedData: any) => {
-    setData(updatedData);
+   setData(updatedData);
     console.log(updatedData);
     editPlot(updatedData)
   };

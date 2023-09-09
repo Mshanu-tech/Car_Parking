@@ -15,6 +15,7 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
   const [editedData, setEditedData] = useState({ ...Data });
   const [uploadedImageName, setUploadedImageName] = useState('');
+  
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -24,15 +25,22 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
 
   const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = event.target;
-
+    event.preventDefault();
+  
     if (type === 'file') {
       const file = event.target.files[0];
+  
       if (file) {
         const uniqueImageName = `${uuidv4()}.${file.name.split('.').pop()}`;
-        await updateImage("img/", `img/${Data.images}`, file, uniqueImageName, () => {
+  
+        try {
+          await updateImage("img/", `img/${Data.images}`, file, uniqueImageName);
           console.log("Image updated successfully!");
-          setUploadedImageName(uniqueImageName); // Store the unique image name
-        });
+          
+          setUploadedImageName(uniqueImageName);
+        } catch (error) {
+          console.error("Error updating image:", error);
+        }
       }
     } else {
       setEditedData((prevData: any) => ({
@@ -41,19 +49,15 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
       }));
     }
   };
-
+  
   const handleData = () => {
-    // If a new image was uploaded, update the editedData with the uploadedImageName
     if (uploadedImageName) {
-      setEditedData((prevData: any) => ({
-        ...prevData,
-        images: uploadedImageName,
-      }));
+
+    const updatedData = { ...editedData, images: uploadedImageName };
+
+        updateData(updatedData);
     }
-    updateData(editedData);
-    console.log(uploadedImageName);
-    
-    console.log( editedData,"sdfiusfahj");
+  
     handleClose();
   };
 

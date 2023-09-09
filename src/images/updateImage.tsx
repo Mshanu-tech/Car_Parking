@@ -15,20 +15,18 @@ export const updateImage = (folder: string, oldImage:string, newImage: File, uni
       
       // Reference to the old image
       const oldImageRef = ref(storage, oldImage);
-console.log(oldImage);
-console.log(oldImageRef);
 
       // Delete the old image
-    //   deleteObject(oldImageRef)
-    //     .then(() => {
-    //       console.log("Old image deleted successfully!");
-    //       if (callback) {
-    //         callback();
-    //       }
-    //     })
-    //     .catch((error) => {
-    //       console.error("Error deleting old image:", error);
-    //     });
+      deleteObject(oldImageRef)
+        .then(() => {
+          console.log("Old image deleted successfully!");
+          if (callback) {
+            callback();
+          }
+        })
+        .catch((error) => {
+          console.error("Error deleting old image:", error);
+        });
     })
     .catch((error) => {
       console.error("Image upload error:", error);
