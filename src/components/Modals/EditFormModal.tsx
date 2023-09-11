@@ -15,7 +15,7 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
   const [editedData, setEditedData] = useState({ ...Data });
   const [uploadedImageName, setUploadedImageName] = useState('');
-  
+
 
   const handleClose = () => setShow(false);
   const handleShow = () => {
@@ -26,17 +26,17 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
     const { name, value, type } = event.target;
     event.preventDefault();
-  
+
     if (type === 'file') {
       const file = event.target.files[0];
-  
+
       if (file) {
         const uniqueImageName = `${uuidv4()}.${file.name.split('.').pop()}`;
-  
+
         try {
           await updateImage("img/", `img/${Data.images}`, file, uniqueImageName);
           console.log("Image updated successfully!");
-          
+
           setUploadedImageName(uniqueImageName);
         } catch (error) {
           console.error("Error updating image:", error);
@@ -49,14 +49,15 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
       }));
     }
   };
-  
+
   const handleData = () => {
+    let updatedData = { ...editedData };
+  
     if (uploadedImageName) {
-
-    const updatedData = { ...editedData, images: uploadedImageName };
-
-        updateData(updatedData);
+      updatedData = { ...updatedData, images: uploadedImageName };
     }
+    updateData(updatedData);
+    console.log(updatedData); 
   
     handleClose();
   };
@@ -87,6 +88,22 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
             type="text"
             name="placename"
             defaultValue={Data.placename}
+          />
+          <p>How many car spot</p>
+          <input
+            style={{ color: 'black' }}
+            onChange={handleInputChange}
+            type="text"
+            name="carspot"
+            defaultValue={Data.carspot}
+          />
+          <p>Which car spot not working</p>
+          <input
+            style={{ color: 'black' }}
+            onChange={handleInputChange}
+            type="text"
+            name="notworking"
+            defaultValue={Data.notworking}
           />
           <p>Price</p>
           <input

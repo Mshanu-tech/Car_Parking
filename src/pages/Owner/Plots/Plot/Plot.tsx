@@ -10,6 +10,8 @@ import DeleteImage from '../../../../images/deleteImage';
 
 const Plot: React.FC = () => {
   const [Data, setData] = useState({});
+  // console.log(Data);
+  
   const navigator = useNavigate()
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const { id } = useParams<{ id: string }>();
@@ -93,6 +95,16 @@ const Plot: React.FC = () => {
                   </tr>
                 </tbody>
               </table>
+              <div style={{display:"flex"}}>
+              <div style={{paddingRight:"30px"}}>
+                <p>working sport</p>
+                <p> {Data.carspot} </p>
+              </div>
+              <div>
+                <p>Not working sport</p>
+                <p> {Data.notWorkingspot} </p>
+              </div>
+              </div>
               <p> {Data.plotdetails} </p>
             </div>
           </div>

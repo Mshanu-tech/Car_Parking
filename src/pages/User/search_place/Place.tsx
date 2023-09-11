@@ -12,7 +12,7 @@ const Place: React.FC = () => {
   const navigate = useNavigate();
 
   const handleCard = () => {
-    navigate('/plot');
+    navigate(`/plot/${selectedCardId}`);
   };
 
   const handleLocation = (id: any) => {
@@ -65,10 +65,13 @@ const Place: React.FC = () => {
                 <div className={` ${style.cardname}`}>
                   <h6>Plot_Name: {e.center} </h6>
                   <h6>City:{e.placename}</h6>
-                  <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-                    <label>Hour:{e.hour}</label>
-                    <label>Day:{e.day}</label>
+                  <div style={{ display: "flex", justifyContent: "space-between", width:"110%" }}>
+                    <p>Hour:{e.hour}</p>
+                    <p>Day:{e.day}</p>
+                    <p>Month:{e.month}</p>
                   </div>
+                  {/* <p>Details: {e.plotdetails} </p> */}
+
                 </div>               </div>
             ))}
           </div>
