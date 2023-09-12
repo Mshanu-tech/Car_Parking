@@ -55,6 +55,25 @@ const Plot: React.FC = () => {
     editPlot(updatedData)
   };
 
+const renderFeatureImages = () => {
+  const features = Data.features || {};
+  const featureImages = [
+    { name: '24hours', src: '/image/owner/24hours.jpg' },
+    { name: 'Key', src: '/image/owner/Key.jpg' },
+    { name: 'cctv', src: '/image/owner/cctv.jpg' },
+    { name: 'weelchair', src: '/image/owner/weelchair.jpg' },
+  ];
+
+  return featureImages.map((feature) => {
+    if (features[feature.name]) {
+      return (
+        <img key={feature.name} style={{ width: '40px' }} src={feature.src} alt="" />
+      );
+    }
+    return null;
+  });
+};
+
   return (
     <>
       <Nav />
@@ -79,7 +98,12 @@ const Plot: React.FC = () => {
               </div>
               <h5 style={{ fontWeight: "bold" }}>Center Name : {Data.center}</h5>
               <h5 style={{ fontWeight: "bold" }}>Place Name : {Data.placename} </h5>
-              <table>
+
+            <div style={{display:"flex"}}>
+            {renderFeatureImages()}
+            </div>
+
+              <table style={{paddingTop:"0px"}}>
                 <thead>
                   <tr>
                     <th>Hour</th>
@@ -105,6 +129,7 @@ const Plot: React.FC = () => {
                 <p> {Data.notWorkingspot} </p>
               </div>
               </div>
+              <h5>Details</h5>
               <p> {Data.plotdetails} </p>
             </div>
           </div>

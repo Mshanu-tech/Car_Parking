@@ -13,6 +13,7 @@ interface Props {
 
 const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
+  const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
   const [editedData, setEditedData] = useState({ ...Data });
   const [uploadedImageName, setUploadedImageName] = useState('');
 
@@ -49,6 +50,10 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
       }));
     }
   };
+
+  const handleInput = (name:string) =>{
+
+  }
 
   const handleData = () => {
     let updatedData = { ...editedData };
@@ -105,6 +110,41 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
             name="notworking"
             defaultValue={Data.notworking}
           />
+             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+                  <img style={{ width: "40px" }} src="/image/owner/24hours.jpg" alt="" />
+                  <input
+                    onClick={() => handleInput('24hours')}
+                    type="radio"
+                    name="24hours"
+                    id="24hours"
+                    // checked={selectedFeatures['24hours'] || false}
+                  />
+                  <img style={{ width: "40px" }} src="/image/owner/Key.jpg" alt="" />
+                  <input
+                    onClick={() => handleInput('Key')}
+                    type="radio"
+                    name="Key"
+                    id="Key"
+                    // checked={selectedFeatures['Key'] || false}
+                  />
+                  <img style={{ width: "40px" }} src="/image/owner/cctv.jpg" alt="" />
+                  <input
+                    onClick={() => handleInput('cctv')}
+                    type="radio"
+                    name="cctv"
+                    id="cctv"
+                    // checked={selectedFeatures['cctv'] || false}
+                  />
+                  <img style={{ width: "40px" }} src="/image/owner/weelchair.jpg" alt="" />
+                  <input
+                    onClick={() => handleInput('weelchair')}
+                    type="radio"
+                    name="weelchair"
+                    id="weelchair"
+                    checked={selectedFeatures['weelchair'] || false}
+                  />               
+
+                  </div>
           <p>Price</p>
           <input
             style={{ width: '60px' }}
