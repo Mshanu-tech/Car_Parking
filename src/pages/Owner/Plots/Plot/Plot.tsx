@@ -136,7 +136,7 @@ const renderFeatureImages = () => {
         </div>
       </div>
     </>
-  );
-};
+  )
+}
 
 export default Plot;

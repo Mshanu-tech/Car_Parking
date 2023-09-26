@@ -66,6 +66,8 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   
     handleClose();
   };
+  // console.log(Data.features);
+
 
   return (
     <>
@@ -110,41 +112,48 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
             name="notworking"
             defaultValue={Data.notworking}
           />
-             <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-                  <img style={{ width: "40px" }} src="/image/owner/24hours.jpg" alt="" />
-                  <input
-                    onClick={() => handleInput('24hours')}
-                    type="radio"
-                    name="24hours"
-                    id="24hours"
-                    // checked={selectedFeatures['24hours'] || false}
-                  />
-                  <img style={{ width: "40px" }} src="/image/owner/Key.jpg" alt="" />
-                  <input
-                    onClick={() => handleInput('Key')}
-                    type="radio"
-                    name="Key"
-                    id="Key"
-                    // checked={selectedFeatures['Key'] || false}
-                  />
-                  <img style={{ width: "40px" }} src="/image/owner/cctv.jpg" alt="" />
-                  <input
-                    onClick={() => handleInput('cctv')}
-                    type="radio"
-                    name="cctv"
-                    id="cctv"
-                    // checked={selectedFeatures['cctv'] || false}
-                  />
-                  <img style={{ width: "40px" }} src="/image/owner/weelchair.jpg" alt="" />
-                  <input
-                    onClick={() => handleInput('weelchair')}
-                    type="radio"
-                    name="weelchair"
-                    id="weelchair"
-                    checked={selectedFeatures['weelchair'] || false}
-                  />               
 
-                  </div>
+    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+      
+    {Object.entries(Data.features).map(([featureName, isEnabled]) => (
+    <div key={featureName}>
+      <img style={{ width: '40px' }} src={`/image/owner/${featureName}.jpg`} alt="" />
+      <input
+        onClick={() => handleInput(featureName)}
+        type="radio"
+        name={featureName}
+        id={featureName}
+        checked={selectedFeatures[featureName]}
+      />
+    </div>
+  ))}
+      {/* <img style={{ width: "40px" }} src="/image/owner/Key.jpg" alt="" />
+      <input
+        onClick={() => handleInput('Key')}
+        type="radio"
+        name="Key"
+        id="Key"
+        checked={selectedFeatures['Key']}
+      />
+      <img style={{ width: "40px" }} src="/image/owner/cctv.jpg" alt="" />
+      <input
+        onClick={() => handleInput('cctv')}
+        type="radio"
+        name="cctv"
+        id="cctv"
+        checked={selectedFeatures['cctv']}
+      /> */}
+      {/* <img style={{ width: "40px" }} src="/image/owner/weelchair.jpg" alt="" />
+      <input
+        onClick={() => handleInput('weelchair')}
+        type="radio"
+        name="weelchair"
+        id="weelchair"
+        checked={selectedFeatures['weelchair']}
+      /> */}
+    </div>
+  
+
           <p>Price</p>
           <input
             style={{ width: '60px' }}
