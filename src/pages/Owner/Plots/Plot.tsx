@@ -8,7 +8,7 @@ import Fab from '@mui/material/Fab';
 import AddIcon from '@mui/icons-material/Add';
 import { getPlots } from '../../../service/ownerApi';
 import { useNavigate } from 'react-router-dom';
-// import { fetchImageURLs } from '../../../images/downloadIamge';
+import { fetchImageURLs } from '../../../images/downloadIamge';
 import { Link } from 'react-router-dom';
 // import Plot from './Plot/Plot';
 
@@ -20,13 +20,13 @@ const Plots: React.FC = () => {
 
   useEffect(() => {
 
-    // fetchImageURLs('img/')
-    //   .then((urls) => {
-    //     setImageURLs(urls);
-    //   })
-    //   .catch((error) => {
-    //     console.error('Error fetching image URLs:', error);
-    //   });
+    fetchImageURLs('img/')
+      .then((urls) => {
+        setImageURLs(urls);
+      })
+      .catch((error) => {
+        console.error('Error fetching image URLs:', error);
+      });
 
     getPlots()
       .then((res) => {
@@ -73,7 +73,7 @@ const Plots: React.FC = () => {
         {Data.map((plot: any, index: number) => (
           <Link to={`plot/${plot._id}`} key={index} className={`card ${css.responsiveCard}`} style={{ marginTop: '35px' }}>
             <Image
-              // src={imageURLs[index]?.url}
+              src={imageURLs[index]?.url}
               style={{ width: '34%' }}
               rounded
             />

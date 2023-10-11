@@ -51,22 +51,22 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
     }
   };
 
-  const handleInput = (name:string) =>{
+  const handleInput = (name: string) => {
 
   }
 
   const handleData = () => {
     let updatedData = { ...editedData };
-  
+
     if (uploadedImageName) {
       updatedData = { ...updatedData, images: uploadedImageName };
     }
     updateData(updatedData);
-    console.log(updatedData); 
-  
+    console.log(updatedData);
+
     handleClose();
   };
-  // console.log(Data.features);
+  console.log(Data.features);
 
 
   return (
@@ -113,11 +113,12 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
             defaultValue={Data.notworking}
           />
 
-    <div style={{ display: "flex", justifyContent: "space-evenly" }}>
-      
-    {Object.entries(Data.features).map(([featureName, isEnabled]) => (
+          <div style={{ display: "flex", justifyContent: "space-evenly" }}>
+
+          {/* <div style={{ display: "flex", justifyContent: "space-evenly" }}> */}
+  {/* {Object.entries(Data.features).map(([featureName]) => (
     <div key={featureName}>
-      <img style={{ width: '40px' }} src={`/image/owner/${featureName}.jpg`} alt="" />
+      <img style={{ width: '40px' }} src={Data.features.imageUrl} alt="" />
       <input
         onClick={() => handleInput(featureName)}
         type="radio"
@@ -125,9 +126,12 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
         id={featureName}
         checked={selectedFeatures[featureName]}
       />
+      <label htmlFor={featureName}>{Data.features.name}</label>
     </div>
-  ))}
-      {/* <img style={{ width: "40px" }} src="/image/owner/Key.jpg" alt="" />
+  ))} */}
+{/* </div> */}
+
+            {/* <img style={{ width: "40px" }} src="/image/owner/Key.jpg" alt="" />
       <input
         onClick={() => handleInput('Key')}
         type="radio"
@@ -143,7 +147,7 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
         id="cctv"
         checked={selectedFeatures['cctv']}
       /> */}
-      {/* <img style={{ width: "40px" }} src="/image/owner/weelchair.jpg" alt="" />
+            {/* <img style={{ width: "40px" }} src="/image/owner/weelchair.jpg" alt="" />
       <input
         onClick={() => handleInput('weelchair')}
         type="radio"
@@ -151,8 +155,8 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
         id="weelchair"
         checked={selectedFeatures['weelchair']}
       /> */}
-    </div>
-  
+          </div>
+
 
           <p>Price</p>
           <input

@@ -5,7 +5,8 @@ const initialState = {
     email:"",
     phone:0,
     carno:0,
-    id:0
+    id:0,
+    image:""
 }
 
 const cardSlice = createSlice({
@@ -20,6 +21,7 @@ const cardSlice = createSlice({
             state.phone = action.payload.phone
             state.carno = action.payload.carNo
             state.id = action.payload.id
+            state.image = action.payload.uniqueImageName
         }
     }
 })

@@ -6,20 +6,20 @@ import { useNavigate } from 'react-router-dom';
 
 interface Props {
   // BtnName:string,
-  // BtnAction:any
+  BtnAction:any
 }
 
-const nav: React.FC<Props> = () => {
+const nav: React.FC<Props> = ({BtnAction}) => {
 
   const navigate = useNavigate()
 
   const handleProfile = () => {
-    navigate('/owner/profile');
+    navigate(`/${BtnAction}/profile`);
     console.log("profile");
 }
 
 const handleLogin = () => {
-    navigate('/owner/login');
+    navigate(`/${BtnAction}/login`);
     console.log("Login");
 }
 

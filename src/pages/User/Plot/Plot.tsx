@@ -39,7 +39,7 @@ const Plot:React.FC = () => {
 
   //find image
   const image = imageURLs.find((img) => img.name === Data.images);
-  // console.log(image);
+  console.log(image);
   
 
 
@@ -51,9 +51,13 @@ const Plot:React.FC = () => {
         <h4 > {Data.center} </h4>
         <div className={`col-sm-12 col-md-12 ${style.plot}`}>
           <div style={{width:"50%"}}>
-        <div className={style.plot_image}>
-          <img src={image?.url} alt="" />
-        </div>
+          <div className={style.plot_image_container}>
+              <img
+                className={style.plot_image}
+                src={image?.url}
+                alt=''
+              />
+            </div>
            {/* <div style={{display:"flex",marginTop:"20px"}}>
         <img style={{width:"10%",marginRight:"20px"}} src="https://c8.alamy.com/comp/2J0W2YR/parked-cars-at-the-exit-in-a-large-underground-car-park-2J0W2YR.jpg" alt="" />
         <img style={{width:"10%",marginRight:"20px"}} src="https://c8.alamy.com/comp/2J0W2YR/parked-cars-at-the-exit-in-a-large-underground-car-park-2J0W2YR.jpg" alt="" />
@@ -65,7 +69,7 @@ const Plot:React.FC = () => {
             <h5 style={{color:"black"}}>Details : About the car parking</h5>
             <p className={style.plot_details_p}> {Data.plotdetails} </p>
         </div>
-        {/* <div className={style.card}>
+        <div className={style.card}>
             <h6>CAR  PARK AVAILABILITY</h6>
             <div className={style.mincard}>
                 <div>
@@ -79,7 +83,7 @@ const Plot:React.FC = () => {
             </div>
             <b>Selected time: 2 hours</b>
             <Btn buttonhandler={handlebooking} Btnname='BOOKING FOR 100E' color='outline-danger'/>
-        </div>   */}
+        </div>  
         </div>
         <div>
           <p className={style.plot_details_p}> {Data.placename} </p>

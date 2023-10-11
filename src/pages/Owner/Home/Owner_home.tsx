@@ -30,7 +30,7 @@ const OwnerHome = (props: Props) => {
     
     return (
         <>
-        <Nav/>
+        <Nav BtnAction={"owner"}/>
             <div className={style.main_image}>
                 <button onClick={handleUser} className={style.button}>User</button>
                 <button onClick={handlePlot} className={style.button}>Plot</button>
