@@ -5,6 +5,7 @@ import Btn from '../../../components/button/Btn'
 import { useNavigate, useParams } from 'react-router-dom'
 import { getPlot } from '../../../service/ownerApi'
 import { fetchImageURLs } from '../../../images/downloadIamge'
+import { useSelector } from 'react-redux'
 
 // type Props = {}
 
@@ -13,6 +14,12 @@ const Plot:React.FC = () => {
   const [Data, setData] = useState({})  
   const [imageURLs, setImageURLs] = useState<string[]>([]);
   const navigate = useNavigate()
+
+  const startingTime = useSelector((state: any) => state.parkingTime.startingTime)
+  const startingDate = useSelector((state: any) => state.parkingTime.startingDate)
+  const endingTime = useSelector((state: any) => state.parkingTime.endingTime)
+  const endingDate = useSelector((state: any) => state.parkingTime.endingDate)
+
 
   const handlebooking = () =>{
     navigate('/form')
@@ -28,18 +35,32 @@ const Plot:React.FC = () => {
         setData(plotData);
       }
     });
-    fetchImageURLs('img/')
-    .then((url) => {
-      setImageURLs(url);
-    })
-    .catch((error) => {
-      console.error('Error fetching image URLs:', error);
-    });
+    // fetchImageURLs('img/')
+    // .then((url) => {
+    //   setImageURLs(url);
+    // })
+    // .catch((error) => {
+    //   console.error('Error fetching image URLs:', error);
+    // });
   },[id])
 
   //find image
   const image = imageURLs.find((img) => img.name === Data.images);
   console.log(image);
+  
+
+  const timestamp1 = new Date(`${startingDate}T${startingTime}:00`);
+  const timestamp2 = new Date(`${endingDate}T${endingTime}:00`);
+  
+  // Calculate the time difference in milliseconds
+  const timeDifferenceMs = timestamp2 - timestamp1;
+  
+  // Calculate days, hours, and minutes
+  const days = Math.floor(timeDifferenceMs / (1000 * 60 * 60 * 24));
+  const hours = Math.floor((timeDifferenceMs % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+  const minutes = Math.floor((timeDifferenceMs % (1000 * 60 * 60)) / (1000 * 60));
+  
+  console.log(`Time Difference: ${days} days, ${hours} hours, and ${minutes} minutes`);
   
 
 
@@ -74,14 +95,14 @@ const Plot:React.FC = () => {
             <div className={style.mincard}>
                 <div>
                 <p>PARK ENTRANCE</p>
-                <p>Sa, 8 Jul 10:00</p>
+                <p>{`${startingDate} ${startingTime}`}</p>
                 </div>
                 <div>
                 <p>LEAVE PARK</p>
-                <p>Sa, 8 Jul 1:00</p>
+                <p>{`${endingDate} ${endingTime}`}</p>
                 </div>
             </div>
-            <b>Selected time: 2 hours</b>
+            <b>{`Selected time:  ${days} days, ${hours} hours, and ${minutes} minutes`}</b>
             <Btn buttonhandler={handlebooking} Btnname='BOOKING FOR 100E' color='outline-danger'/>
         </div>  
         </div>

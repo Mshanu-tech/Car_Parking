@@ -19,8 +19,8 @@ const nav: React.FC<Props> = ({BtnAction}) => {
 }
 
 const handleLogin = () => {
-    navigate(`/${BtnAction}/login`);
-    console.log("Login");
+    navigate(`/${BtnAction}`);
+    console.log(`/${BtnAction}`);
 }
 
   return (

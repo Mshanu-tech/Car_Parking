@@ -1,20 +1,36 @@
-import React from 'react';
+import React, { useState } from 'react';
 import Nav from '../../../share/nav/Nav';
 import homeStyles from './home.module.css';
 import Search from '../../../components/search/Search';
 import { useNavigate } from 'react-router-dom';
+import { useDispatch } from 'react-redux';
+import { ADD } from '../../../components/createSlice/ParkingTime';
 
 const Home: React.FC = () => {
+
+  const dispatch = useDispatch();
+
+  const [ startingTime, setstartingTime ] = useState('')
+  const [ startingDate, setstartingDate ] = useState('')
+
+  const [ endingTime, setendingTime ] = useState('')
+  const [ endingDate, setendingDate ] = useState('')
+
   const navigate = useNavigate()
+  
 
   const HandleSearch = () =>{
+    const carTime = {
+      startingTime,startingDate,endingTime,endingDate
+    }
+    dispatch(ADD(carTime))
+    console.log(carTime);
     navigate('/Place')
-    // console.log("hello");
   }
   return (
     <>
       <div className='container-fluid'>
-        <Nav BtnAction={"/"}/>
+      <Nav BtnAction={"login"}/>
         <section className={homeStyles.main_image}>
           <div style={{width:"1000px"}} className="row justify-content-center">
           <Search searchAction={HandleSearch}/>
@@ -23,19 +39,19 @@ const Home: React.FC = () => {
 
               <div className={homeStyles.date_time}>
                 <div >
-                  <input className={homeStyles.time} type="time" name="" id="" />
+                  <input onChange={(e)=>setstartingTime(e.target.value)} className={homeStyles.time} type="time" name="startingTime" id="" />
                 </div>
                 <div>
-                  <input type="date" />
+                  <input onChange={(e)=>setstartingDate(e.target.value)} name='startingDate' type="date" />
                 </div>
               </div>
 
               <div className={homeStyles.date_time}>
                 <div >
-                  <input className={homeStyles.time} type="time" name="" id="" />
+                  <input onChange={(e)=>setendingTime(e.target.value)} className={homeStyles.time} type="time" name="endingTime" id="" />
                 </div>
                 <div>
-                  <input type="date" />
+                  <input onChange={(e)=>setendingDate(e.target.value)} type="date" name='endingDate' />
                 </div>
               </div>
 

@@ -5,8 +5,21 @@ import Search from '../../../components/search/Search';
 import Image from 'react-bootstrap/Image';
 import { useNavigate } from 'react-router-dom';
 import { Plots } from '../../../service/userApi';
+import { useDispatch, useSelector } from 'react-redux';
+import { UPDATE } from '../../../components/createSlice/ParkingTime';
 
 const Place: React.FC = () => {
+  const dispatch = useDispatch();
+  const startTime = useSelector((state: any) => state.parkingTime.startingTime);
+  const startDate = useSelector((state: any) => state.parkingTime.startingDate);
+  const endTime = useSelector((state: any) => state.parkingTime.endingTime);
+  const endDate = useSelector((state: any) => state.parkingTime.endingDate);
+
+  const [newStartingTime, setNewStartingTime] = useState(startTime);
+  const [newStartingDate, setNewStartingDate] = useState(startDate);
+  const [newEndingTime, setNewEndingTime] = useState(endTime);
+  const [newEndingDate, setNewEndingDate] = useState(endDate);
+
   const [Data, setData] = useState([]);
   const [selectedCardId, setSelectedCardId] = useState(null);
   const navigate = useNavigate();
@@ -17,6 +30,19 @@ const Place: React.FC = () => {
 
   const handleLocation = (id: any) => {
     setSelectedCardId(id);
+  };
+
+  const handleTimeDateChange = () => {
+    // Dispatch the updated values to the store
+    const updatedTimeDate = {
+      startingTime: newStartingTime,
+      startingDate: newStartingDate,
+      endingTime: newEndingTime,
+      endingDate: newEndingDate,
+    };
+    dispatch(UPDATE(updatedTimeDate));
+    // You can also navigate to another page or perform other actions as needed
+    // navigate('/someotherpage');
   };
 
   useEffect(() => {
@@ -38,21 +64,43 @@ const Place: React.FC = () => {
           <Search />
           <div className={style.time_date}>
             <div>
-              <input defaultValue="02:30" type="time" />
-              <input defaultValue="02/08/2024" type="date" name="" id="" />
+              <input
+                value={newStartingTime}
+                onChange={(e) => setNewStartingTime(e.target.value)}
+                type="time"
+              />
+              <input
+                value={newStartingDate}
+                onChange={(e) => setNewStartingDate(e.target.value)}
+                type="date"
+                name=""
+                id=""
+              />
             </div>
             <div>
-              <input type="time" />
-              <input defaultValue="02/08/2024" type="date" name="" id="" />
+              <input
+                value={newEndingTime}
+                onChange={(e) => setNewEndingTime(e.target.value)}
+                type="time"
+              />
+              <input
+                value={newEndingDate}
+                onChange={(e) => setNewEndingDate(e.target.value)}
+                type="date"
+                name=""
+                id=""
+              />
             </div>
+            <button onClick={handleTimeDateChange}>Update Time & Date</button>
           </div>
         </div>
 
         <div style={{ display: 'flex' }}>
+          <button onClick={handleCard}>aghfhbc</button>
           <div className={style.alignCard}>
             {Data.map((e: any, index: number) => (
               <div
-              onDoubleClick={handleCard}
+                onDoubleClick={handleCard}
                 onClick={() => handleLocation(e._id)}
                 key={index}
                 className={`card col-12 ${style.responsiveCard}`}
@@ -65,18 +113,17 @@ const Place: React.FC = () => {
                 <div className={` ${style.cardname}`}>
                   <h6>Plot_Name: {e.center} </h6>
                   <h6>City:{e.placename}</h6>
-                  <div style={{ display: "flex", justifyContent: "space-between", width:"110%" }}>
+                  <div style={{ display: "flex", justifyContent: "space-between", width: "110%" }}>
                     <p>Hour:{e.hour}</p>
                     <p>Day:{e.day}</p>
                     <p>Month:{e.month}</p>
                   </div>
                   {/* <p>Details: {e.plotdetails} </p> */}
-
-                </div>               </div>
+                </div>
+              </div>
             ))}
           </div>
-
-          {/* map */}
+             {/* map */}
 
 
           {/* <div className={style.leftSide}>
@@ -113,7 +160,6 @@ const Place: React.FC = () => {
 
 
           {/* map */}
-
         </div>
       </div>
     </div>
