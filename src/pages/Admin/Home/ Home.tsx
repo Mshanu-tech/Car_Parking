@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Box from '@mui/material/Box';
 import Fab from '@mui/material/Fab';
 import LogoutIcon from '@mui/icons-material/Logout';
@@ -11,10 +11,15 @@ import Nav from '../../../share/nav/Nav'
 import Card from '../../../share/card/Card';
 import style from './home.module.css'
 import { useNavigate } from 'react-router-dom';
+import { Plots, owners, users } from '../../../service/adminApi';
 
 // type Props = {}
 
 const Home: React.FC = () => {
+
+    const [PlotData, setPlotData] = useState([])
+    const [UserData, setUserData] = useState([])
+    const [OwnerData, setOwnerData] = useState([])
 
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
@@ -31,9 +36,41 @@ const Home: React.FC = () => {
     const handleplot = () => {
         navigate('plots')
     }
+
+    useEffect(() => {
+
+        users().then((res) => {
+            if (res.data === "fail") {
+                alert("Not Data fetched")
+            } else {
+                const data = res.data.data.user
+                setUserData(data)
+            }
+        });
+
+        owners().then((res) => {
+            if (res.data === "fail") {
+                alert("Not Data fetched")
+            } else {
+                const data = res.data.data.owner
+                setOwnerData(data)
+            }
+        });
+
+        Plots().then((res) => {
+            if (res.data === "fail") {
+                alert("Not Data fetched")
+            } else {
+                const data = res.data.data.plot
+                setPlotData(data)
+            }
+        });
+
+    }, [])
+
     return (
         <>
-            <Nav />
+            <Nav BtnAction={"admin/login"} />
             <div className="container-fluid">
                 <div className={`row ${style.main}`}>
                     <div className={style.leftside}>
@@ -79,6 +116,9 @@ const Home: React.FC = () => {
 
 
                     <div className={style.rightside}>
+
+                        {/* owner */}
+
                         <div className={style.adminBTN}>
                             <button className={style.BTN} onClick={handleShow}>Profile</button>
                             {/* <Btn color='outline-success' Btnname='Profile' buttonhandler={handleShow}/> */}
@@ -86,48 +126,63 @@ const Home: React.FC = () => {
                         <div className={style.owners}>
                             <h5 className={style.sub_heading}>OWNERS</h5>
                             <Carousel>
-                                <Carousel.Item>
+                                {
+                                    OwnerData.map((data:any)=>(
+                                        <Carousel.Item>
+                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
+                                    </Carousel.Item>
+                                    ))
+                                }
+                                {/* <Carousel.Item>
                                     <div className={style.align_card}>
-                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374'/>
-                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374'/>
+                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
+                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
                                     </div>
-                                </Carousel.Item>
-                                <Carousel.Item>
-                                    <div className={style.align_card}>
-                                    <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374'/>
-                                    <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374'/>
-                                    </div>
-                                </Carousel.Item>
+                                </Carousel.Item> */}
                             </Carousel>
                         </div>
+
+                        {/* owner */}
+
+                        {/* plot */}
+
+
                         <div className={style.plots}>
                             <h5 className={style.sub_heading}>PLOTS</h5>
                             <Carousel>
                                 <Carousel.Item>
                                     <div className={style.align_card}>
-                                       <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg'/>
-                                       <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg'/>
+                                        <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg' />
+                                        <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg' />
                                     </div>
                                 </Carousel.Item>
                                 <Carousel.Item>
                                     <div className={style.align_card}>
-                                    <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg'/>
-                                    <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg'/>
+                                        <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg' />
+                                        <Card cardAction={handleplot} image='https://previews.123rf.com/images/nonc/nonc1701/nonc170100030/70250300-empty-parking-lots-aerial-view.jpg' />
                                     </div>
                                 </Carousel.Item>
                             </Carousel>
                         </div>
+
+                        {/* plot */}
+
+                        {/* user */}
+
                         <div className={style.users}>
                             <h5 className={style.sub_heading}>USERS</h5>
                             <Carousel>
                                 <Carousel.Item>
                                     <div className={style.align_card}>
-                                        <Card cardAction={handleuser}  image='https://cdn.vox-cdn.com/thumbor/3mMZTWZXU6__FF97jacasmWc7nw=/125x0:3875x2500/1200x800/filters:focal(125x0:3875x2500)/cdn.vox-cdn.com/uploads/chorus_image/image/48822937/Bumblebee_in_transformers_4_age_of_extinction-wide__1_.0.0.jpg'/>
-                                        <Card cardAction={handleuser} image='https://cdn.vox-cdn.com/thumbor/3mMZTWZXU6__FF97jacasmWc7nw=/125x0:3875x2500/1200x800/filters:focal(125x0:3875x2500)/cdn.vox-cdn.com/uploads/chorus_image/image/48822937/Bumblebee_in_transformers_4_age_of_extinction-wide__1_.0.0.jpg'/>
+                                        <Card cardAction={handleuser} image='https://cdn.vox-cdn.com/thumbor/3mMZTWZXU6__FF97jacasmWc7nw=/125x0:3875x2500/1200x800/filters:focal(125x0:3875x2500)/cdn.vox-cdn.com/uploads/chorus_image/image/48822937/Bumblebee_in_transformers_4_age_of_extinction-wide__1_.0.0.jpg' />
+                                        <Card cardAction={handleuser} image='https://cdn.vox-cdn.com/thumbor/3mMZTWZXU6__FF97jacasmWc7nw=/125x0:3875x2500/1200x800/filters:focal(125x0:3875x2500)/cdn.vox-cdn.com/uploads/chorus_image/image/48822937/Bumblebee_in_transformers_4_age_of_extinction-wide__1_.0.0.jpg' />
                                     </div>
                                 </Carousel.Item>
                             </Carousel>
                         </div>
+
+                        {/* user */}
+
                     </div>
                 </div>
             </div>
