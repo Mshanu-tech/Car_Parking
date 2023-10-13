@@ -7,6 +7,7 @@ import style from './login.module.css';
 // import { saveOwner } from '../../../api/owner';
 // import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
+import { userData } from '../../../service/userApi';
 // import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 
 // type Props = {};
@@ -24,16 +25,16 @@ const Login: React.FC = () => {
   const handleSignup = async (e: any) => {
 
     e.preventDefault();
-    const userData = {
+    const userdata = {
       name,
       email,
       phone,
       password
     };
-    // console.log(userData);
+    console.log(userdata);
   //   dispatch(ADD(userData))
-  //  await ownerSignup(userData)
-  //   navigate('/owner')
+   await userData(userdata)
+    // navigate('/owner')
 
   }
 

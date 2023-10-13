@@ -2,7 +2,7 @@ import React, { useState } from 'react'
 import style from './form.module.css'
 import { ADD } from '../../../components/createSlice/CardSlice'
 import { useNavigate } from 'react-router-dom'
-import { useDispatch } from 'react-redux'
+import { useDispatch, useSelector } from 'react-redux'
 import { CarDetails } from '../../../service/userApi'
 import { v4 as uuidv4 } from 'uuid';
 import { uploadImage } from '../../../images/uploadImage'
@@ -19,6 +19,13 @@ const Form: React.FC<Props> = () => {
   const [carNo, setCarno] = useState('')
   const [photo, setPhoto] = useState(null)
 
+  const startingTime = useSelector((state: any) => state.parkingTime.startingTime)
+  const startingDate = useSelector((state: any) => state.parkingTime.startingDate)
+  const endingTime = useSelector((state: any) => state.parkingTime.endingTime)
+  const endingDate = useSelector((state: any) => state.parkingTime.endingDate)
+  const Payment = useSelector((state:any) => state.parkingTime.price)
+  const Time = useSelector((state:any) => state.parkingTime.time)
+
 
   const handlesubmit = (e: any) => {
 
@@ -34,12 +41,12 @@ const Form: React.FC<Props> = () => {
     // console.log(id);
     e.preventDefault()
     const obj = {
-      name, email, phone, carNo, id, uniqueImageName
+      name, email, phone, carNo, id, uniqueImageName, startingTime,
+       startingDate, endingTime, endingDate, Time, Payment
     }
-    console.log(obj.uniqueImageName);
-    
+
     dispatch(ADD(obj))
-    CarDetails(obj)
+    // CarDetails(obj)
     navigate('/card')
   }
   return (

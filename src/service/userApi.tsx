@@ -6,3 +6,6 @@ export const Plots = async ()=>{
 export const CarDetails = async (value: any) =>{
     return await axiosInstance('JwtToken').post("/carDetails", {...value});
 }
+export const userData = async (value: any) => {
+    return await axiosInstance('JwtToken').post("/",{...value});
+}
