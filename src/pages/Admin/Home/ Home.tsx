@@ -11,15 +11,24 @@ import Nav from '../../../share/nav/Nav'
 import Card from '../../../share/card/Card';
 import style from './home.module.css'
 import { useNavigate } from 'react-router-dom';
-import { Plots, owners, users } from '../../../service/adminApi';
+// import { Plots, owners, users } from '../../../service/adminApi';
+// import { fetchImageURLs } from '../../../images/downloadIamge';
 
 // type Props = {}
 
 const Home: React.FC = () => {
 
-    const [PlotData, setPlotData] = useState([])
-    const [UserData, setUserData] = useState([])
+    // const [PlotData, setPlotData] = useState([])
+    // const [PlotimageURLs, setPlotImageURLs] = useState<string[]>([]);
+
+    // const [UserData, setUserData] = useState([])
+    // const [UserimageURLs, setUserImageURLs] = useState<string[]>([]);
+
     const [OwnerData, setOwnerData] = useState([])
+    // const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
+
+    // console.log(OwnerimageURLs);
+
 
     const [show, setShow] = useState(false);
     const navigate = useNavigate()
@@ -39,32 +48,42 @@ const Home: React.FC = () => {
 
     useEffect(() => {
 
-        users().then((res) => {
-            if (res.data === "fail") {
-                alert("Not Data fetched")
-            } else {
-                const data = res.data.data.user
-                setUserData(data)
-            }
-        });
+        // carImage
 
-        owners().then((res) => {
-            if (res.data === "fail") {
-                alert("Not Data fetched")
-            } else {
-                const data = res.data.data.owner
-                setOwnerData(data)
-            }
-        });
+        // fetchImageURLs('owner/')
+        // .then((urls)=>{
+        //     setOwnerImageURLs(urls)
+        // })
+        // .catch((error)=>{
+        //     console.error('Error fetching image URLs:', error);
+        // })
 
-        Plots().then((res) => {
-            if (res.data === "fail") {
-                alert("Not Data fetched")
-            } else {
-                const data = res.data.data.plot
-                setPlotData(data)
-            }
-        });
+        // users().then((res) => {
+        //     if (res.data === "fail") {
+        //         alert("Not Data fetched")
+        //     } else {
+        //         const data = res.data.data.user
+        //         setUserData(data)
+        //     }
+        // });
+
+        // owners().then((res) => {
+        //     if (res.data === "fail") {
+        //         alert("Not Data fetched")
+        //     } else {
+        //         const data = res.data.data.owner
+        //         setOwnerData(data)
+        //     }
+        // });
+
+        // Plots().then((res) => {
+        //     if (res.data === "fail") {
+        //         alert("Not Data fetched")
+        //     } else {
+        //         const data = res.data.data.plot
+        //         setPlotData(data)
+        //     }
+        // });
 
     }, [])
 
@@ -114,7 +133,6 @@ const Home: React.FC = () => {
                     </Offcanvas>
 
 
-
                     <div className={style.rightside}>
 
                         {/* owner */}
@@ -126,21 +144,44 @@ const Home: React.FC = () => {
                         <div className={style.owners}>
                             <h5 className={style.sub_heading}>OWNERS</h5>
                             <Carousel>
-                                {
-                                    OwnerData.map((data:any)=>(
-                                        <Carousel.Item>
-                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
+                                {OwnerData.map((owner: any, index: number) => (
+                                    <Carousel.Item key={index}>
+                                        <div className={style.align_card}>
+                                            <div className={`card ${style.responsiveCard}`}>
+                                                <Image
+                                                    className={style.image}
+                                                    // src={image}
+                                                    rounded
+                                                />
+                                                <div className={style.cardname}>
+                                                    <h6>Name: {owner.name}</h6>
+                                                    <h6>Phone: {owner.phone}</h6>
+                                                    <h6>Email: {owner.email} </h6>
+                                                </div>
+                                            </div>
+
+                                            {/* Add another card with different data */}
+                                            {OwnerData[index + 2] && (
+                                                <div className={`card ${style.responsiveCard}`}>
+                                                    <Image
+                                                        className={style.image}
+                                                        // src={image}
+                                                        rounded
+                                                    />
+                                                    <div className={style.cardname}>
+                                                        <h6>Name: {OwnerData[index + 2].name}</h6>
+                                                        <h6>Phone: {OwnerData[index + 2].phone}</h6>
+                                                        <h6>Email: {OwnerData[index + 2].email} </h6>
+                                                    </div>
+                                                </div>
+                                            )}
+                                        </div>
                                     </Carousel.Item>
-                                    ))
-                                }
-                                {/* <Carousel.Item>
-                                    <div className={style.align_card}>
-                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
-                                        <Card cardAction={handleowner} image='https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374' />
-                                    </div>
-                                </Carousel.Item> */}
+                                ))}
                             </Carousel>
                         </div>
+
+
 
                         {/* owner */}
 

@@ -3,6 +3,8 @@ import style from './profile.module.css'
 import Btn from '../../../components/button/Btn'
 import { isLogout } from '../../../api/owner'
 import { useNavigate } from 'react-router-dom'
+import Image from 'react-bootstrap/Image';
+
 // import { useSelector } from 'react-redux'
 
 type Props = {}
@@ -28,12 +30,17 @@ const Profile:React.FC<Props> = () => {
     <Btn color='Red' Btnname='Logout' buttonhandler={handleLogout}/>
     <div className="container-fluid">
       <div className="row">
-        <div className={style.image}>
-        <img style={{width:"250px",borderRadius:"10px"}} src="https://variety.com/wp-content/uploads/2017/06/transformers-the-last-knight-8.jpg?w=1000" alt="" />
+        <div style={{width:"100vw" , height:"100vh"}}>
+          <div style={{width:"60%"}}>
+        {/* <img className={style.image} src="/image/owner/owner_home.jpg" alt="" /> */}
+        <Image className={style.image} src="/image/owner/owner_home.jpg" roundedCircle />
+
+        <button className={style.editBtn}>hai</button>
+        </div>
         <div style={{color:"black", display:"flex"}}>
-              Name: {userData.name}
-              Email: {userData.email}
-              Phone: {userData.phone}
+              {/* Name: {userData.name} */}
+              {/* // Email: {userData.email} */}
+              {/* Phone: {userData.phone} */}
         </div>
         </div>
       </div>

@@ -33,7 +33,13 @@ const Login: React.FC = () => {
     // console.log(userData);
     dispatch(ADD(userData))
    await ownerSignup(userData)
-    navigate('/owner')
+   .then((res) => {
+    if(res.data === "success"){
+      navigate('/owner/login')
+    }else{
+      alert("Not Get a Owner")
+    }
+   })
 
 
     // try {
