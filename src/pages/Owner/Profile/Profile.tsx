@@ -4,49 +4,51 @@ import Btn from '../../../components/button/Btn'
 import { isLogout } from '../../../api/owner'
 import { useNavigate } from 'react-router-dom'
 import Image from 'react-bootstrap/Image';
-
-// import { useSelector } from 'react-redux'
+import { useSelector } from 'react-redux'
 
 type Props = {}
 
-const Profile:React.FC<Props> = () => {
+const Profile: React.FC<Props> = () => {
   // const name = useSelector((state:any)=>state.login.name)
   // const phone =useSelector((state:any)=>state.login.phone)  
   // const email =useSelector((state:any)=>state.login.email)  
 
   const navigate = useNavigate()
 
-  const handleLogout = () =>{
-    isLogout()
+  const handleLogout = () => {
+    // isLogout()
     navigate('/owner')
   }
 
   const userDataString = localStorage.getItem('owner');
   const userData = userDataString ? JSON.parse(userDataString) : {};
+
+  console.log(userData);
   
 
   return (
     <>
-    <Btn color='Red' Btnname='Logout' buttonhandler={handleLogout}/>
-    <div className="container-fluid">
-      <div className="row">
-        <div style={{width:"100vw" , height:"100vh"}}>
-          <div style={{width:"60%"}}>
-        {/* <img className={style.image} src="/image/owner/owner_home.jpg" alt="" /> */}
-        <Image className={style.image} src="/image/owner/owner_home.jpg" roundedCircle />
+      <div className={style.profile}>
+        <div className={style.card}>
+          <Image className={style.image} src="/image/owner/owner_home.jpg" rounded />
+          <div className={style.Btn}>
+          <Btn color='white'  buttonhandler={handleLogout} Btnname='Logout'/>
+          <button>edit</button>
+          </div>
 
-        <button className={style.editBtn}>hai</button>
-        </div>
-        <div style={{color:"black", display:"flex"}}>
-              {/* Name: {userData.name} */}
-              {/* // Email: {userData.email} */}
-              {/* Phone: {userData.phone} */}
+          <div className={style.data}>
+          <p> Name: {userData.name}</p>
+          <p>Email: {userData.email}</p>
+          <p>Phone: {userData.phone}</p>
         </div>
         </div>
       </div>
-    </div>
     </>
   )
 }
+
+// Name: {userData.name}
+// Email: {userData.email}
+// Phone: {userData.phone}
 
 export default Profile

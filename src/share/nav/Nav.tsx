@@ -19,7 +19,7 @@ const nav: React.FC<Props> = ({BtnAction}) => {
 }
 
 const handleLogin = () => {
-    navigate(`/${BtnAction}`);
+    navigate(`/${BtnAction}/login`);
     console.log(`/${BtnAction}`);
 }
 
@@ -30,7 +30,6 @@ const handleLogin = () => {
             ) : (
                 <Nav BtnName="Login" BtnAction={handleLogin} />
             )}
-
    </>
   );
 }

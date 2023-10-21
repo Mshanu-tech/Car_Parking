@@ -26,7 +26,6 @@ const OwnerHome = (props: Props) => {
         }
     }
 
-
     
     return (
         <>
