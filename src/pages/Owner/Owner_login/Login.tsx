@@ -13,6 +13,7 @@ import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 // props: Props
 
 const Login: React.FC = () => {
+
   const navigate = useNavigate()
   const dispatch = useDispatch();
   // const [state, setstate]=useState()
