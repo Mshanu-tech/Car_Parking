@@ -8,6 +8,8 @@ import { saveOwner } from '../../../api/owner';
 import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OwnerData } from '../../../components/createSlice/OwnerLogin';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadImage } from '../../../images/uploadImage';
 
 // type Props = {};
 // props: Props
@@ -21,22 +23,31 @@ const Login: React.FC = () => {
   const [email, setemail] = useState('')
   const [phone, setphone] = useState('')
   const [password, setpassword] = useState('')
+  const [image, setimage] = useState(null)
 
   const handleSignup = async (e: any) => {
 
     e.preventDefault();
+    const uniqueId = uuidv4();
+    const fileExtension = image?.name.split('.').pop();
+    const uniqueImageName = `${uniqueId}.${fileExtension}`;
+
+    uploadImage('owner/',image,uniqueImageName,()=>{
+      alert('Image uploaded successfully!');
+    });
     const userData = {
       name,
       email,
       phone,
-      password
+      password,
+      Image: uniqueImageName
     };
     // console.log(userData);
     dispatch(ADD(userData))
    await ownerSignup(userData)
    .then((res) => {
     if(res.data === "success"){
-      navigate('/owner/login')
+      navigate('/owner')
     }else{
       alert("Not Get a Owner")
     }
@@ -113,7 +124,7 @@ const Login: React.FC = () => {
                     <div className={style['card-back']}>
                       <div className={style['center-wrap']}>
                         <div className={`${style.section} ${style['text-center']}`}>
-                          <h4 className="mb-4 pb-3">Sign Up</h4>
+                          <h4 className="pb-3">Sign Up</h4>
                           <div className={`${style['form-group']}`}>
                             <input type="text" onChange={(e) => { setName(e.target.value) }} className={style['form-style']} placeholder="Your Full Name" id="logname" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-user`}></i>
@@ -129,6 +140,10 @@ const Login: React.FC = () => {
                           <div className={`${style['form-group']} mt-2`}>
                             <input type="password" onChange={(e) => { setpassword(e.target.value) }} className={style['form-style']} placeholder="Your Password" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-lock-alt`}></i>
+                          </div>
+                          <div className={`${style['form-group']} mt-2`}>
+                            <input type="file" onChange={(e:any) => { setimage(e.target.files[0]) }} className={style['form-style']} placeholder="Image" autoComplete="off" />
+                            <i className={`${style['input-icon']} uil uil-image`}></i>
                           </div>
                           <button type="button" onClick={handleSignup} className={style.btn}>Submit</button>
                         </div>

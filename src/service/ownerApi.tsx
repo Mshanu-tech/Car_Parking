@@ -23,3 +23,6 @@ export const editPlot = async (value: any) => {
 export const deletePlot = async (id:string) => {
     return await axiosInstance('JwtToken').delete(`/owner/plot/${id}`);
 }
+export const editOwner = async (value:any) => {
+    return await axiosInstance('JwtToken').put("/owner/profile", {...value})
+}

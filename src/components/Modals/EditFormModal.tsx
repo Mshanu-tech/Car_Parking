@@ -13,7 +13,7 @@ interface Props {
 
 const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
   const [show, setShow] = useState(false);
-  const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
+  // const [selectedFeatures, setSelectedFeatures] = useState<Record<string, boolean>>({});
   const [editedData, setEditedData] = useState({ ...Data });
   const [uploadedImageName, setUploadedImageName] = useState('');
 
@@ -51,9 +51,9 @@ const EditForm: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
     }
   };
 
-  const handleInput = (name: string) => {
+  // const handleInput = (name: string) => {
 
-  }
+  // }
 
   const handleData = () => {
     let updatedData = { ...editedData };

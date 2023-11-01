@@ -32,7 +32,7 @@ const Plot: React.FC = () => {
         setImageURLs(url);
       })
       .catch((error) => {
-        console.error('Error fetching image URLs:', error);
+        console.log('Error fetching image URLs:', error);
       });
   }, [id]);
 
