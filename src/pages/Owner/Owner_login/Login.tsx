@@ -18,10 +18,10 @@ const Login: React.FC = () => {
 
   const navigate = useNavigate()
   const dispatch = useDispatch();
-  // const [state, setstate]=useState()
+  const [message, setmessage]=useState('')
   const [name, setName] = useState('')
   const [email, setemail] = useState('')
-  const [phone, setphone] = useState('')
+  const [number, setnumber] = useState('')
   const [password, setpassword] = useState('')
   const [image, setimage] = useState(null)
 
@@ -38,7 +38,7 @@ const Login: React.FC = () => {
     const userData = {
       name,
       email,
-      phone,
+      number,
       password,
       Image: uniqueImageName
     };
@@ -46,8 +46,14 @@ const Login: React.FC = () => {
     dispatch(ADD(userData))
    await ownerSignup(userData)
    .then((res) => {
-    if(res.data === "success"){
-      navigate('/owner')
+    if(res.data === "plz fill the property"){
+      setmessage("plz fill the property")
+    }
+    else if(res.data === "Email already exist"){
+      setmessage("'Email already exist'")
+    }
+    else if(res.data === "success"){
+      navigate('/owner/otpverification')
     }else{
       alert("Not Get a Owner")
     }
@@ -73,9 +79,13 @@ const Login: React.FC = () => {
       // await axios.post("http://localhost:5000/owner/login", loginData)
     await  ownerLogin(loginData)
         .then(res => {
-          if (res.data === "fail") {
-            alert("Login failed");
-          } else {
+          if (res.data === "email not get") {
+            alert("email not get");
+          }else if(res.data === "password wrong"){
+            alert(" wrong password")
+          }else if(res.data === "fail"){
+            alert("not get owner")
+          }else {
             const data = res.data
             saveOwner(data)
             dispatch(OwnerData(data))
@@ -125,6 +135,7 @@ const Login: React.FC = () => {
                       <div className={style['center-wrap']}>
                         <div className={`${style.section} ${style['text-center']}`}>
                           <h4 className="pb-3">Sign Up</h4>
+                          <p>{message}</p>
                           <div className={`${style['form-group']}`}>
                             <input type="text" onChange={(e) => { setName(e.target.value) }} className={style['form-style']} placeholder="Your Full Name" id="logname" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-user`}></i>
@@ -134,7 +145,7 @@ const Login: React.FC = () => {
                             <i className={`${style['input-icon']} uil uil-at`}></i>
                           </div>
                           <div className={`${style['form-group']} mt-2`}>
-                            <input type="text" onChange={(e) => { setphone(e.target.value) }} className={style['form-style']} placeholder="Your Phone" autoComplete="off" />
+                            <input type="text" onChange={(e) => { setnumber(e.target.value) }} className={style['form-style']} placeholder="Your Phone" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-phone`}></i>
                           </div>
                           <div className={`${style['form-group']} mt-2`}>

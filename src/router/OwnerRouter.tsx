@@ -9,6 +9,7 @@ import Users from '../pages/Owner/Users/User';
 import User from '../pages/Owner/Users/User/User';
 import Car from '../pages/Owner/Users/userCar/Car';
 import Profile from '../pages/Owner/Profile/Profile';
+import OwnerOtpverification from '../pages/Owner/Owner_login/OwnerOtpverification';
 
 const OwnerRouter: React.FC = () => {
   return (
@@ -23,6 +24,7 @@ const OwnerRouter: React.FC = () => {
         <Route path='/users/user' element={<User />} />
         <Route path='/users/user/car' element={<Car />} />
         <Route path='/profile' element={<Profile />} />
+        <Route path='/owner/otpverification' element={<OwnerOtpverification />} />
       </Routes>
     </>
   );

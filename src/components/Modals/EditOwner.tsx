@@ -1,47 +1,68 @@
 import React, { useState } from 'react';
 import Button from 'react-bootstrap/Button';
 import Modal from 'react-bootstrap/Modal';
+import { updateImage } from '../../images/updateImage';
+import { v4 as uuidv4 } from 'uuid';
 
 interface Props {
-    btnName: string;
-    btnColor: any;
-    updateData: any;
-    Data: any;
+  btnName: string;
+  btnColor: any;
+  updateData: any;
+  Data: any;
 }
 
-const EditOwner: React.FC<Props> = ({updateData, btnColor, btnName, Data }) =>{
-    const [show, setShow] = useState(false);
-    const [editedData, setEditedData] = useState({ ...Data });
+const EditOwner: React.FC<Props> = ({ updateData, btnColor, btnName, Data }) => {
+  const [show, setShow] = useState(false);
+  const [editedData, setEditedData] = useState({ ...Data });
+  const [uploadedImageName, setUploadedImageName] = useState('');
 
-    const handleClose = () => setShow(false);
-    const handleShow = () => {
-        setEditedData({ ...Data });
-        setShow(true);
-      };
+  const handleClose = () => setShow(false);
+  const handleShow = () => {
+    setEditedData({ ...Data });
+    setShow(true);
+  };
 
-      const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
-        const { name, value, type } = event.target;
-        event.preventDefault();
+  const handleInputChange = async (event: React.ChangeEvent<HTMLInputElement>) => {
+    const { name, value, type } = event.target;
+    event.preventDefault();
 
-        if (type === 'file') {
+    if (type === 'file') {
+      const file = event.target.files[0];
+      if (file) {
+        const uniqueImageName = `${uuidv4()}.${file.name.split('.').pop()}`;
+console.log(Data.image);
 
-        }else{
-            setEditedData((prevData: any) => ({
-                ...prevData,
-                [name]: value
-            }));
+        try {
+          await updateImage("owner/", `owner/${Data.image}`, file, uniqueImageName);
+          console.log("Image updated successfully!");
+
+          setUploadedImageName(uniqueImageName);
+        } catch (error) {
+          console.error("Error updating image:", error);
         }
-      };
-
-      const handleData = () => {
-        let updatedData = { ...editedData };
-        updateData(updatedData)
-        handleClose();
       }
+    } else {
+      setEditedData((prevData: any) => ({
+        ...prevData,
+        [name]: value
+      }));
+    }
+  };
 
-    return(
-        <>
-        <Button variant={btnColor} onClick={handleShow}>
+  const handleData = () => {
+    let updatedData = { ...editedData };
+    if (uploadedImageName) {
+      updatedData = { ...updatedData, image: uploadedImageName };
+    }
+    updateData(updatedData)
+    // console.log(updateData);
+    
+    handleClose();
+  }
+
+  return (
+    <>
+      <Button variant={btnColor} onClick={handleShow}>
         {btnName}
       </Button>
 
@@ -50,8 +71,8 @@ const EditOwner: React.FC<Props> = ({updateData, btnColor, btnName, Data }) =>{
           <Modal.Title>Modal heading</Modal.Title>
         </Modal.Header>
         <Modal.Body>
-        <p>Name</p>
-        <input
+          <p>Name</p>
+          <input
             style={{ color: 'black' }}
             onChange={handleInputChange}
             type="text"
@@ -67,12 +88,17 @@ const EditOwner: React.FC<Props> = ({updateData, btnColor, btnName, Data }) =>{
             defaultValue={Data.email}
           />
           <p>Phone</p>
-            <input
+          <input
             style={{ color: 'black' }}
             onChange={handleInputChange}
             type="text"
             name="phone"
             defaultValue={Data.phone}
+          />
+          <input
+            onChange={handleInputChange}
+            type="file"
+            name="images"
           />
         </Modal.Body>
         <Modal.Footer>
@@ -84,7 +110,7 @@ const EditOwner: React.FC<Props> = ({updateData, btnColor, btnName, Data }) =>{
           </Button>
         </Modal.Footer>
       </Modal>
-        </>
-    )
+    </>
+  )
 }
 export default EditOwner

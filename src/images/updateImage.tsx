@@ -15,7 +15,8 @@ export const updateImage = (folder: string, oldImage:string, newImage: File, uni
       
       // Reference to the old image
       const oldImageRef = ref(storage, oldImage);
-
+      // console.log(oldImageRef,oldImage);
+      
       // Delete the old image
       deleteObject(oldImageRef)
         .then(() => {

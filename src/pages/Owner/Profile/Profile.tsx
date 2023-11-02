@@ -41,8 +41,12 @@ const Profile: React.FC<Props> = () => {
   };
 
   const updateData = (data:any) =>{
+    // console.log(data);
+    
     setData(data)
-    editOwner(Data)
+    editOwner(data)
+    // console.log(Data);
+    
   }
 
 
