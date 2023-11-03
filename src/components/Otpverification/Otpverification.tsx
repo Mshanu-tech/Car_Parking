@@ -1,15 +1,36 @@
-import React from 'react';
+import React, {  useState, useRef } from 'react';
 
-type Props = {};
+interface Props {
+  Token: (otpValue: string) => void;
+};
 
-const Otpverification: React.FC<Props> = (props) => {
-  console.log("sdkfjhdfs");
-  
+const Otpverification: React.FC<Props> = ({Token}) => {
+  const [otpValues, setOtpValues] = useState("");
+  const inputRefs = [useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null), useRef<HTMLInputElement>(null)];
+
+
+  const handleInputChange = (index: number, value: string) => {
+    if (/[0-9]/.test(value)) {
+      const newOtpValues = otpValues.split('');
+      newOtpValues[index] = value;
+      setOtpValues(newOtpValues.join(''));
+      
+      if (index < 3 && value) {
+        inputRefs[index + 1].current?.focus();
+      }
+    }
+  };
+
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
+    Token(otpValues)
+    console.log(otpValues);
+  };
+
   return (
     <>
-    <h1>xkfjhdfssduoifih</h1>
-      {/* <style>
-        {`
+      <style>
+      {`
           body{background-color:red}
           .height-100{height:100vh}
           .card{width:400px;border:none;height:300px;box-shadow: 0px 5px 20px 0px #d2dae3;z-index:1;display:flex;justify-content:center;align-items:center}
@@ -26,15 +47,24 @@ const Otpverification: React.FC<Props> = (props) => {
       </style>
       <div className="container height-100 d-flex justify-content-center align-items-center">
         <div className="position-relative">
-          <form action="/verificaton" method="post">
+          <form onSubmit={handleSubmit}>
             <div className="card p-2 text-center">
-              <h6>Please enter the one time password <br/> to verify your account</h6>
+              <h6>Please enter the one-time password <br /> to verify your account</h6>
               <div></div>
               <div id="otp" className="inputs d-flex flex-row justify-content-center mt-2">
-                <input className="m-2 text-center form-control rounded" name="digit1" type="text" id="first" maxLength={1} />
-                <input className="m-2 text-center form-control rounded" name="digit2" type="text" id="second" maxLength={1} />
-                <input className="m-2 text-center form-control rounded" name="digit3" type="text" id="third" maxLength={1} />
-                <input className="m-2 text-center form-control rounded" name="digit4" type="text" id="fourth" maxLength={1} />
+                {inputRefs.map((inputRef, index) => (
+                  <input
+                    key={index}
+                    ref={inputRef}
+                    className="m-2 text-center form-control rounded"
+                    name={`digit${index + 1}`}
+                    type="text"
+                    id={`digit${index + 1}`}
+                    maxLength={1}
+                    value={otpValues[index]}
+                    onChange={(e) => handleInputChange(index, e.target.value)}
+                  />
+                ))}
               </div>
               <div className="mt-4">
                 <button className="btn btn-danger px-4 validate">Validate</button>
@@ -43,31 +73,6 @@ const Otpverification: React.FC<Props> = (props) => {
           </form>
         </div>
       </div>
-
-      <script>
-        {`
-          // Get all the input fields
-          const inputs = document.querySelectorAll('#otp input');
-
-          // Add an event listener to each input field
-          inputs.forEach((input, index) => {
-            input.addEventListener('input', (event) => {
-              // Get the value of the current input field
-              const value = (event.target as HTMLInputElement).value;
-
-              // If the value is a digit, move the focus to the next input field
-              if (/[0-9]/.test(value)) {
-                // If this is the last input field, submit the form
-                if (index === inputs.length - 1) {
-                  (event.target.form as HTMLFormElement).submit();
-                } else {
-                  (inputs[index + 1] as HTMLInputElement).focus();
-                }
-              }
-            });
-          });
-        `}
-      </script> */}
     </>
   );
 };

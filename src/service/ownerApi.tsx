@@ -26,3 +26,6 @@ export const deletePlot = async (id:string) => {
 export const editOwner = async (value:any) => {
     return await axiosInstance('JwtToken').put("/owner/profile", {...value})
 }
+export const Ownerotpverificaton = async (value:any) => {
+    return await axiosInstance('JwtToken').post("/owner/otpverificaton",{...value})
+} 

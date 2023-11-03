@@ -1,17 +1,18 @@
-import React from 'react'
+// import React from 'react'
 import Otpverification from '../../../components/Otpverification/Otpverification'
+import { Ownerotpverificaton } from '../../../service/ownerApi'
 
 // type Props = {}
 
 const OwnerOtpverification = () => {
-  console.log("asdkjn");
-  
+  const Otp = (e:any) => {
+    console.log(e);
+    
+    Ownerotpverificaton(e)
+  }  
   return (
     <>
-    
-    <h1 >sadlfjasf</h1>
-        {/* <Otpverification/> */}
-
+        <Otpverification Token={Otp}/>
     </>
   )
 }

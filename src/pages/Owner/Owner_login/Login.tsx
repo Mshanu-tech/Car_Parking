@@ -46,13 +46,16 @@ const Login: React.FC = () => {
     dispatch(ADD(userData))
    await ownerSignup(userData)
    .then((res) => {
+    console.log(res.data);
+    
     if(res.data === "plz fill the property"){
+      navigate('/owner/otpverification')
       setmessage("plz fill the property")
     }
     else if(res.data === "Email already exist"){
       setmessage("'Email already exist'")
     }
-    else if(res.data === "success"){
+    else if(res.data === "otpverificaton"){
       navigate('/owner/otpverification')
     }else{
       alert("Not Get a Owner")
@@ -99,7 +102,6 @@ const Login: React.FC = () => {
     //   console.log(error);
     // }
   };
-  
 
   return (
     <>
@@ -156,6 +158,7 @@ const Login: React.FC = () => {
                             <input type="file" onChange={(e:any) => { setimage(e.target.files[0]) }} className={style['form-style']} placeholder="Image" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-image`}></i>
                           </div>
+                          {/*  */}
                           <button type="button" onClick={handleSignup} className={style.btn}>Submit</button>
                         </div>
                       </div>

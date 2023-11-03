@@ -24,7 +24,7 @@ const OwnerRouter: React.FC = () => {
         <Route path='/users/user' element={<User />} />
         <Route path='/users/user/car' element={<Car />} />
         <Route path='/profile' element={<Profile />} />
-        <Route path='/owner/otpverification' element={<OwnerOtpverification />} />
+        <Route path='/otpverification' element={<OwnerOtpverification />} />
       </Routes>
     </>
   );
