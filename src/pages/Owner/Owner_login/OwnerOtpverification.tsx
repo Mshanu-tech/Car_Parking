@@ -2,17 +2,14 @@
 import Otpverification from '../../../components/Otpverification/Otpverification'
 import { Ownerotpverificaton } from '../../../service/ownerApi'
 
-// type Props = {}
 
 const OwnerOtpverification = () => {
-  const Otp = (e:any) => {
-    console.log(e);
-    
+  const Otp = (e: any) => {
     Ownerotpverificaton(e)
-  }  
+  }
   return (
     <>
-        <Otpverification Token={Otp}/>
+      <Otpverification Token={Otp} />
     </>
   )
 }
