@@ -50,18 +50,17 @@ const Login: React.FC = () => {
     
     if(res.data === "plz fill the property"){
       navigate('/owner/otpverification')
-      setmessage("plz fill the property")
+      // setmessage("plz fill the property")
     }
     else if(res.data === "Email already exist"){
-      setmessage("'Email already exist'")
+      // setmessage("'Email already exist'")
     }
     else if(res.data === "otpverificaton"){
-      navigate('/owner/otpverification')
+      // navigate('/owner/otpverification')
     }else{
       alert("Not Get a Owner")
     }
    })
-
 
     // try {
     //   await axios.post("http://localhost:5000/owner/signup", userData);
