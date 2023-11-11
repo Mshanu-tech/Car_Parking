@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
 import style from './login.module.css';
-// import axios from 'axios';
 import { ownerLogin } from '../../../service/ownerApi';
 import {ownerSignup} from '../../../service/ownerApi';
 import {ADD} from '../../../components/createSlice/OwnerSignup'
@@ -9,7 +8,7 @@ import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 import { v4 as uuidv4 } from 'uuid';
-import { uploadImage } from '../../../images/uploadImage';
+// import { uploadImage } from '../../../images/uploadImage';
 
 // type Props = {};
 // props: Props
@@ -32,9 +31,10 @@ const Login: React.FC = () => {
     const fileExtension = image?.name.split('.').pop();
     const uniqueImageName = `${uniqueId}.${fileExtension}`;
 
-    uploadImage('owner/',image,uniqueImageName,()=>{
-      alert('Image uploaded successfully!');
-    });
+    // uploadImage('owner/',image,uniqueImageName,()=>{
+    //   alert('Image uploaded successfully!');
+    // });
+
     const userData = {
       name,
       email,
@@ -44,19 +44,19 @@ const Login: React.FC = () => {
     };
     // console.log(userData);
     dispatch(ADD(userData))
-   await ownerSignup(userData)
+  await ownerSignup(userData)
    .then((res) => {
     console.log(res.data);
     
     if(res.data === "plz fill the property"){
       navigate('/owner/otpverification')
-      // setmessage("plz fill the property")
+      setmessage("plz fill the property")
     }
     else if(res.data === "Email already exist"){
-      // setmessage("'Email already exist'")
+      setmessage("Email already exist")
     }
     else if(res.data === "otpverificaton"){
-      // navigate('/owner/otpverification')
+      navigate('/owner/otpverification')
     }else{
       alert("Not Get a Owner")
     }
