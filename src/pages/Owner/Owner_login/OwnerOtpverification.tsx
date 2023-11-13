@@ -1,6 +1,6 @@
 // import React from 'react'
 import Otpverification from '../../../components/Otpverification/Otpverification'
-// import { Ownerotpverificaton } from '../../../service/ownerApi'
+import { Ownerotpverificaton } from '../../../service/ownerApi'
 
 
 const OwnerOtpverification = () => {
