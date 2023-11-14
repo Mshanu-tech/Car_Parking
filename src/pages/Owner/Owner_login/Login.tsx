@@ -55,7 +55,7 @@ const Login: React.FC = () => {
     else if(res.data === "Email already exist"){
       setmessage("Email already exist")
     }
-    else if(res.data === "otpverificaton"){
+    else if(res.data.message === "otpverificaton"){
       navigate('/owner/otpverification')
     }else{
       alert("Not Get a Owner")
@@ -81,6 +81,8 @@ const Login: React.FC = () => {
       // await axios.post("http://localhost:5000/owner/login", loginData)
     await  ownerLogin(loginData)
         .then(res => {
+          console.log(res);
+          
           if (res.data === "email not get") {
             alert("email not get");
           }else if(res.data === "password wrong"){
