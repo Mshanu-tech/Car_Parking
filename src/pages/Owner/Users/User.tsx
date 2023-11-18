@@ -1,13 +1,19 @@
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import Image from 'react-bootstrap/Image';
 import style from './user.module.css'
 import Nav from '../../../share/nav/Nav'
 import Search from '../../../components/search/Search'
 import { useNavigate } from 'react-router-dom';
+import { getUsers } from '../../../service/ownerApi';
 
 type Props = {}
 
 const Users: React.FC = (props: Props) => {
+    const [users, setusers] = useState([])
+    const [results, setResults] = useState([]);
+    const [query, setQuery] = useState('');
+
+
     const navigate = useNavigate()
 
     const handleUser = (e:any) =>{
@@ -16,15 +22,33 @@ const Users: React.FC = (props: Props) => {
     }
 
     useEffect(()=>{
-        
+        getUsers()
+        .then((res) => {
+            // console.log(res);
+            
+            if(res.data.message === "success"){
+                setusers(res.data.users)
+            }
+        })
     },[])
+    console.log(users);
+console.log(query);
+
+    const handleSearch = () => {
+        // Simple search logic based on title
+        const filteredResults = users.filter(item =>
+          item.name.toLowerCase().includes(query.toLowerCase())
+        );
+        setResults(filteredResults);
+      };
+    
 
     return (
         <>
             <Nav />
             <div className='container-fluid'>
                 <div>
-                    <Search />
+                    <Search value={setQuery} searchAction={handleSearch} />
                 </div>
                 <div>
                     <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
@@ -40,6 +64,23 @@ const Users: React.FC = (props: Props) => {
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
                         </div>
+                        {
+                            results.map((users: any, index: number)=>(
+                                <div onClick={handleUser} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
+                                <Image
+                                    style={{ width: "32%" }}
+                                    src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374"
+                                    rounded
+                                />
+                                <div style={{ padding: "10px" }} className="cardname">
+                                    <h6>Name: {users.name}</h6>
+                                    <h6>Phone: {users.phone}</h6>
+                                    <h6>Email: {users.email} </h6>
+                                </div>
+                            </div>
+                            ))
+                        }
+
                         <div className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                             <Image
                                 style={{ width: "32%" }}
@@ -53,7 +94,7 @@ const Users: React.FC = (props: Props) => {
                             </div>
                         </div>
                     </div>
-                    <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
+                    {/* <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
                         <div className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                             <Image
                                 style={{ width: "32%" }}
@@ -65,8 +106,8 @@ const Users: React.FC = (props: Props) => {
                                 <h6>Phone: 9898539845</h6>
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
-                        </div>
-                        <div className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
+                        </div> */}
+                        {/* <div className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                             <Image
                                 style={{ width: "32%" }}
                                 src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374"
@@ -77,8 +118,8 @@ const Users: React.FC = (props: Props) => {
                                 <h6>Phone: 9898539845</h6>
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
-                        </div>
-                    </div>
+                        </div> */}
+                    {/* </div> */}
 
                 </div>
             </div>
