@@ -5,11 +5,9 @@
   flex-direction: column;
 }
 .user_detail{
-  font-weight: bold;
-   color: black; 
-   display: contents;
-    margin-top: 20px;
+ padding:"20px";
 }
+
 .car_text{
   color: black;
   font-weight: bold;
@@ -18,4 +16,16 @@
   display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
+    height: 100%;
+    align-content: space-around;
+}
+.blockBTN{
+  border: solid 1px white;
+  border-radius: 5px;
+  width: 20%;
+}
+.blockBTN:hover{
+  background-color: rgb(115, 255, 0);
+  border: solid 2px white;
+
 }

@@ -16,6 +16,11 @@ const User = (props: Props) => {
         navigate('car')
     }
 
+    const handleblock = () =>{
+        console.log();
+        
+    }
+
     return (
         <>
             <Nav />
@@ -25,11 +30,12 @@ const User = (props: Props) => {
                         <Col style={{ display: "contents" }} xs={6} md={4}>
                             <Image width={"200px"} src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374" thumbnail />
                         </Col>
-                        <div className={style.user_detail}>
+                        <div style={{padding:"20px"}} className={style.user_detail}>
                             <h5>Name:Ajith</h5>
                             <h6>Email:ajith@gmail.com</h6>
                             <h6>9873490234</h6>
                         </div>
+                        <button onClick={handleblock} className={style.blockBTN}>Block</button>
                     </div>
                     <div>
                         <h4 className={style.car_text}>Car</h4>

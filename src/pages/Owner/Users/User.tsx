@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect } from 'react'
 import Image from 'react-bootstrap/Image';
 import style from './user.module.css'
 import Nav from '../../../share/nav/Nav'
@@ -14,6 +14,10 @@ const Users: React.FC = (props: Props) => {
         e.preventDefault()
         navigate('user')
     }
+
+    useEffect(()=>{
+        
+    },[])
 
     return (
         <>
@@ -43,7 +47,7 @@ const Users: React.FC = (props: Props) => {
                                 rounded
                             />
                             <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
+                                <h6>Name: Rohan</h6>
                                 <h6>Phone: 9898539845</h6>
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
@@ -57,7 +61,7 @@ const Users: React.FC = (props: Props) => {
                                 rounded
                             />
                             <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
+                                <h6>Name: Roshan</h6>
                                 <h6>Phone: 9898539845</h6>
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
@@ -69,7 +73,7 @@ const Users: React.FC = (props: Props) => {
                                 rounded
                             />
                             <div style={{ padding: "10px" }} className="cardname">
-                                <h6>Name: Ajith</h6>
+                                <h6>Name: aleef</h6>
                                 <h6>Phone: 9898539845</h6>
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>

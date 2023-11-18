@@ -10,6 +10,8 @@ const axiosInstance = (tokenName: any) => {
             'Content-Type': 'application/json'
         }
     });
+
+    // axios.defaults.withCredentials = true;
     
     // instance request interceptor 
     instance.interceptors.request.use((request) => {

@@ -29,3 +29,6 @@ export const editOwner = async (value:any) => {
 export const Ownerotpverificaton = async (value:any) => {
     return await axiosInstance('JwtToken').post("/owner/otpverificaton",{...value})
 } 
+export const getUsers = async () => {
+    return await axiosInstance('JwtToken').get(`/owner/`);
+}
