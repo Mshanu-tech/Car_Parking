@@ -35,7 +35,7 @@ const User = (props: Props) => {
                             <h6>Email:ajith@gmail.com</h6>
                             <h6>9873490234</h6>
                         </div>
-                        {/* <button onClick={handleblock} className={style.blockBTN}>Block</button> */}
+                        <button onClick={handleblock} className={style.blockBTN}>Block</button>
                     </div>
                     <div>
                         <h4 className={style.car_text}>Car</h4>
