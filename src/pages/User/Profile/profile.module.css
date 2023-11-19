@@ -1,0 +1,33 @@
+.profile{
+    width: 100%;
+    height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+.card{
+    display: flex;
+    align-items: center;
+    flex-direction: column;
+    border-radius: 10px;
+    border: 3px solid white;
+    width: 33%;
+    padding-top: 23px;
+    height: 70%;
+    /* background-color: aqua;   */
+}
+.image{
+    width: 260px;
+}
+.data{
+    color: white;
+    display: flex;
+    flex-direction: column;
+}
+.Btn{
+    display: flex;
+    justify-content: space-evenly;
+    width: 100%;
+    height: 70px;
+    align-items: center;
+}

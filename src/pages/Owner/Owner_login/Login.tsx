@@ -57,6 +57,9 @@ const Login: React.FC = () => {
     }
     else if(res.data.message === "otpverificaton"){
       navigate('/owner/otpverification')
+      
+      saveOwner(res.data.token)
+
     }else{
       alert("Not Get a Owner")
     }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from 'react'
+import { useEffect, useState } from 'react'
 import Image from 'react-bootstrap/Image';
 import style from './user.module.css'
 import Nav from '../../../share/nav/Nav'
@@ -6,13 +6,13 @@ import Search from '../../../components/search/Search'
 import { useNavigate } from 'react-router-dom';
 import { getUsers } from '../../../service/ownerApi';
 
-type Props = {}
 
-const Users: React.FC = (props: Props) => {
+
+const Users = () => {
     const [users, setUsers] = useState([]);
     const [filteredUsers, setFilteredUsers] = useState([]);
     const [query, setQuery] = useState('');
-  console.log(filteredUsers);
+//   console.log(filteredUsers);
   
     const navigate = useNavigate();
   
@@ -24,14 +24,14 @@ const Users: React.FC = (props: Props) => {
     useEffect(() => {
       getUsers()
         .then((res) => {
-          console.log(res);
+        //   console.log(res);
           if (res.data.message === "success") {
             setUsers(res.data.users);
             setFilteredUsers(res.data.users)
           }
         });
     }, []);
-    
+
     useEffect(()=>{
         const lowerCaseQuery = query.toLowerCase();
         const filtered = users.filter(user => {
@@ -44,10 +44,14 @@ const Users: React.FC = (props: Props) => {
     const handleSearch = (inputValue: string) => {
     setQuery(inputValue)
     };
+
+    const handleProfile =() =>{
+
+    }
         
     return (
         <>
-            <Nav />
+            <Nav BtnAction={handleProfile}/>
             <div className='container-fluid'>
                 <div>
                 <Search value={query} searchAction={handleSearch} />
@@ -67,8 +71,8 @@ const Users: React.FC = (props: Props) => {
                             </div>
                         </div>
                         {
-                            filteredUsers.map((users: any)=>(
-                                <div onClick={handleUser} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
+                            filteredUsers.map((users: any , index: number)=>(
+                                <div key={index} onClick={handleUser} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                                 <Image
                                     style={{ width: "32%" }}
                                     src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374"

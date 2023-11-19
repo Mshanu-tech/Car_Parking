@@ -30,7 +30,7 @@ const Home: React.FC = () => {
   return (
     <>
       <div className='container-fluid'>
-      <Nav BtnAction={"login"}/>
+      <Nav name='user' BtnAction={""}/>
         <section className={homeStyles.main_image}>
           <div style={{width:"1000px"}} className="row justify-content-center">
           <Search searchAction={HandleSearch}/>

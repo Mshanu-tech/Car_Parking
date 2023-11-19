@@ -8,6 +8,7 @@ import style from './login.module.css';
 // import { useDispatch } from 'react-redux';
 import { useNavigate } from 'react-router-dom';
 import { userData } from '../../../service/userApi';
+import { saveUser } from '../../../api/user';
 // import { OwnerData } from '../../../components/createSlice/OwnerLogin';
 
 // type Props = {};
@@ -32,10 +33,9 @@ const Login: React.FC = () => {
       password
     };
     console.log(userdata);
-  //   dispatch(ADD(userData))
-   await userData(userdata)
-    // navigate('/owner')
-
+    // await userData(userdata)
+    saveUser(userdata)
+    navigate('/')
   }
 
   const handleLogin = async () => {
@@ -43,7 +43,7 @@ const Login: React.FC = () => {
       email,
       password,
     };
-  
+
     // await  ownerLogin(loginData)
     //     .then(res => {
     //       if (res.data === "fail") {
@@ -62,7 +62,7 @@ const Login: React.FC = () => {
     //   console.log(error);
     // }
   };
-  
+
 
   return (
     <>

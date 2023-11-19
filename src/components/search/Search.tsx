@@ -1,4 +1,4 @@
-import React, { useState } from 'react'
+import React from 'react'
 import plot from './search.module.css'
 import Form from 'react-bootstrap/Form';
 
