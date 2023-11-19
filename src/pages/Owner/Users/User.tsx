@@ -9,46 +9,48 @@ import { getUsers } from '../../../service/ownerApi';
 type Props = {}
 
 const Users: React.FC = (props: Props) => {
-    const [users, setusers] = useState([])
-    const [results, setResults] = useState([]);
+    const [users, setUsers] = useState([]);
+    const [filteredUsers, setFilteredUsers] = useState([]);
     const [query, setQuery] = useState('');
-
-
-    const navigate = useNavigate()
-
-    const handleUser = (e:any) =>{
-        e.preventDefault()
-        navigate('user')
-    }
-
-    useEffect(()=>{
-        getUsers()
+  console.log(filteredUsers);
+  
+    const navigate = useNavigate();
+  
+    const handleUser = (e: any) => {
+      e.preventDefault();
+      navigate('user');
+    };
+  
+    useEffect(() => {
+      getUsers()
         .then((res) => {
-            // console.log(res);
-            
-            if(res.data.message === "success"){
-                setusers(res.data.users)
-            }
-        })
-    },[])
-    console.log(users);
-console.log(query);
-
-    const handleSearch = () => {
-        // Simple search logic based on title
-        const filteredResults = users.filter(item =>
-          item.name.toLowerCase().includes(query.toLowerCase())
-        );
-        setResults(filteredResults);
-      };
+          console.log(res);
+          if (res.data.message === "success") {
+            setUsers(res.data.users);
+            setFilteredUsers(res.data.users)
+          }
+        });
+    }, []);
     
-
+    useEffect(()=>{
+        const lowerCaseQuery = query.toLowerCase();
+        const filtered = users.filter(user => {
+            const userName = user.name.toLowerCase()
+            return userName.includes(lowerCaseQuery);
+        })
+        setFilteredUsers(filtered);
+    },[query]);
+  
+    const handleSearch = (inputValue: string) => {
+    setQuery(inputValue)
+    };
+        
     return (
         <>
             <Nav />
             <div className='container-fluid'>
                 <div>
-                    <Search value={setQuery} searchAction={handleSearch} />
+                <Search value={query} searchAction={handleSearch} />
                 </div>
                 <div>
                     <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
@@ -65,7 +67,7 @@ console.log(query);
                             </div>
                         </div>
                         {
-                            results.map((users: any, index: number)=>(
+                            filteredUsers.map((users: any)=>(
                                 <div onClick={handleUser} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                                 <Image
                                     style={{ width: "32%" }}
