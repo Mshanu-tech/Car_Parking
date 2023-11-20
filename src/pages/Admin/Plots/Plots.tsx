@@ -11,7 +11,7 @@ import { useNavigate } from 'react-router-dom';
 const Plot: React.FC = () => {
   const navigate = useNavigate()
   const HandleSearch = () => {
-
+    
   }
   const handleplot = () =>{
     navigate('plot')

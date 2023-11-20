@@ -4,13 +4,37 @@ import Row from 'react-bootstrap/Row';
 import style from './owner.module.css'
 import Nav from '../../../../share/nav/Nav'
 import Card from '../../../../share/card/Card';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useParams } from 'react-router-dom';
+import { fetchImageURLs } from '../../../../images/downloadIamge';
+import { useEffect, useState } from 'react';
+import { getowner } from '../../../../service/adminApi';
 // import { useNavigate } from 'react-router-dom';
 
 type Props = {}
 
 const Owner = (props: Props) => {
-    const navigate = useNavigate()
+    const [ownerData, setOwnerData] = useState({})
+    const [imageURLs, setImageURLs] = useState<string[]>([]);
+    const { id } = useParams<{ id: string }>();
+    console.log(id);
+    
+    useEffect(()=>{
+        getowner(id)
+        .then((res)=>{
+            setOwnerData(res.data)
+        })
+
+        fetchImageURLs('owner/')
+        .then((url) => {
+          setImageURLs(url);
+        })
+        .catch((error) => {
+          console.log('Error fetching image URLs:', error);
+        });
+    },[id])
+
+    const image = imageURLs.find((img) => img.name === ownerData.image);
+
     const handleplot = () => {
 
     }
@@ -22,12 +46,12 @@ const Owner = (props: Props) => {
                 <Row>
                     <div className={style.ownerProfile}>
                         <Col className={style.ownerImage} xs={6} md={4}>
-                            <Image width={"200px"} src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374" thumbnail />
+                            <Image width={"200px"} src={image.url} thumbnail />
                         </Col>
                         <div className={style.ownerDetails}>
-                            <h5>Name:Ajith</h5>
-                            <h6>Email:ajith@gmail.com</h6>
-                            <h6>9873490234</h6>
+                            <h5>Name:{ownerData.name}</h5>
+                            <h6>Email:{ownerData.email}</h6>
+                            <h6>Phone:{ownerData.phone}</h6>
                         </div>
                     </div>
                     <div>

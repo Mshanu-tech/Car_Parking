@@ -34,8 +34,6 @@ const Home: React.FC = () => {
     console.log("userPhoto", UserimageURLs);
     console.log("plotPhoto", PlotimageURLs);
 
-    // console.log(OwnerimageURLs);
-
 
     const [show, setShow] = useState(false);
     const navigate = useNavigate()

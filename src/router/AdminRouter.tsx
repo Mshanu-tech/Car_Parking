@@ -22,7 +22,7 @@ const AdminRouter:React.FC = (props: Props) => {
         <Route path='/owners' element={<Owners/>}/>
         <Route path='/plots' element={<Plots/>}/>
         <Route path='/user' element={<User/>}/>
-        <Route path='/owners/owner' element={<Owner/>}/>
+        <Route path='/owners/:id' element={<Owner/>}/>
         <Route path='/plot' element={<Plot/>}/>
 
     </Routes>

@@ -3,3 +3,28 @@
   flex-wrap: wrap;
   justify-content: space-evenly;
 }
+.image{
+  width: 32%;
+}
+.responsiveCard {
+  width: 100%;
+  max-width: 400px;
+  /* margin: 0 auto; */
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+  background-color: #fff;
+  padding: 10px;
+  display: flex;
+  flex-direction: row;
+  /* margin-top:50px; */
+}
+.align_card{
+  display: flex;
+  flex-wrap: wrap; 
+  justify-content: center;
+  padding-top: 30px;
+}
+.cardname{
+  padding: 10px;
+}
