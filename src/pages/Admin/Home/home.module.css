@@ -60,7 +60,7 @@ height: 33%;
   }
 
   @media only screen and (max-width: 1192px) {
-    .owners{
+    /* .owners{
         height: 380px;
     }
     .plots{
@@ -68,7 +68,7 @@ height: 33%;
     }
     .users{
         height: 380px;
-    }
+    } */
   }
 
   @media only screen and (max-width: 900px) {
@@ -81,7 +81,7 @@ height: 33%;
     .rightside {
         width: 100%;
     }
-    .owners{
+    /* .owners{
         height: 200px;
     }
     .plots{
@@ -89,9 +89,9 @@ height: 33%;
     }
     .users{
         height: 200px;
-    }
+    } */
   }
-  @media only screen and (max-width: 838px ) {
+  /* @media only screen and (max-width: 838px ) {
     .owners{
         height: 380px;
     }
@@ -101,7 +101,7 @@ height: 33%;
     .users{
         height: 380px;
     }
-  }
+  } */
   .sub_heading{
     font-weight: bold;
     padding-top: 15px;
