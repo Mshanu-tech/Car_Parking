@@ -9,7 +9,8 @@ import style from './login.module.css';
 import { useNavigate } from 'react-router-dom';
 import { userData } from '../../../service/userApi';
 import { saveUser } from '../../../api/user';
-// import { OwnerData } from '../../../components/createSlice/OwnerLogin';
+import { v4 as uuidv4 } from 'uuid';
+import { uploadImage } from '../../../images/uploadImage';
 
 // type Props = {};
 // props: Props
@@ -22,10 +23,19 @@ const Login: React.FC = () => {
   const [email, setemail] = useState('')
   const [phone, setphone] = useState('')
   const [password, setpassword] = useState('')
+  const [image, setimage] = useState(null)
 
   const handleSignup = async (e: any) => {
 
     e.preventDefault();
+    const uniqueId = uuidv4();
+    const fileExtension = image?.name.split('.').pop();
+    const uniqueImageName = `${uniqueId}.${fileExtension}`;
+
+    uploadImage('user/', image, uniqueImageName, () => {
+      alert('Image uploaded successfully!');
+    });
+
     const userdata = {
       name,
       email,
@@ -33,16 +43,16 @@ const Login: React.FC = () => {
       password
     };
     console.log(userdata);
-    // await userData(userdata)
+    await userData(userdata)
     saveUser(userdata)
     navigate('/')
   }
 
   const handleLogin = async () => {
-    const loginData = {
-      email,
-      password,
-    };
+    // const loginData = {
+    //   email,
+    //   password,
+    // };
 
     // await  ownerLogin(loginData)
     //     .then(res => {
@@ -113,6 +123,10 @@ const Login: React.FC = () => {
                           <div className={`${style['form-group']} mt-2`}>
                             <input type="password" onChange={(e) => { setpassword(e.target.value) }} className={style['form-style']} placeholder="Your Password" autoComplete="off" />
                             <i className={`${style['input-icon']} uil uil-lock-alt`}></i>
+                          </div>
+                          <div className={`${style['form-group']} mt-2`}>
+                            <input type="file" onChange={(e: any) => { setimage(e.target.files[0]) }} className={style['form-style']} placeholder="Image" autoComplete="off" />
+                            <i className={`${style['input-icon']} uil uil-image`}></i>
                           </div>
                           <button type="button" onClick={handleSignup} className={style.btn}>Submit</button>
                         </div>
