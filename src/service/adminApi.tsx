@@ -16,3 +16,12 @@ export const owners = async () => {
 export const getowner = async (id:string) => {
     return await axiosInstance('JwtToken').get(`/admin/owner/${id}`)    
 }
+export const getPlot = async (id:string) => {
+    return await axiosInstance('JwtToken').get(`/admin/plot/${id}`);
+}
+export const editPlot = async (value: any) => {
+    return await axiosInstance('JwtToken').put("/admin/plot", {...value})
+}
+export const deletePlot = async (id:string) => {
+    return await axiosInstance('JwtToken').delete(`/admin/plot/${id}`);
+}

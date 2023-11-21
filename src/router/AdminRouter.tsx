@@ -1,4 +1,4 @@
-import React from 'react'
+// import React from 'react'
 import { Route, Routes } from 'react-router-dom'
 import Home from '../pages/Admin/Home/ Home'
 import Users from '../pages/Admin/Users/user'
@@ -8,11 +8,11 @@ import User from '../pages/Admin/Users/User/User'
 import Owner from '../pages/Admin/Owners/Owner/Owner'
 import Plot from '../pages/Admin/Plots/Plot/Plot'
 import Login from '../pages/Admin/Login/Login'
-import OwnerPlot from '../pages/Admin/Owners/Owner/Plot/Plot'
+// import OwnerPlot from '../pages/Admin/Owners/Owner/Plot/Plot'
 
-type Props = {}
+// type Props = {}
 
-const AdminRouter:React.FC = (props: Props) => {
+const AdminRouter = () => {
   return (
 
     <>
@@ -25,7 +25,7 @@ const AdminRouter:React.FC = (props: Props) => {
         <Route path='/user' element={<User/>}/>
         <Route path='/owners/:id' element={<Owner/>}/>
         {/* <Route path='/owners/:id/plot' element={<OwnerPlot/>}/> */}
-        <Route path='/plot' element={<Plot/>}/>
+        <Route path='/plots/:id' element={<Plot/>}/>
     </Routes>
     </>
     )
