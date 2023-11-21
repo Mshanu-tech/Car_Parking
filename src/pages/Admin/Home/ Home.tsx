@@ -118,6 +118,10 @@ const Home: React.FC = () => {
 
     }, [])
 
+    const handleOwner = (owner:any) => {
+        navigate(`/admin/owners/${owner._id}`)
+    }
+
     return (
         <>
             <Nav BtnAction={"admin/login"} />
@@ -174,11 +178,12 @@ const Home: React.FC = () => {
                         </div>
                         <div className={style.owners}>
                             <h5 className={style.sub_heading}>OWNERS</h5>
+                                                            <p onClick={handleowner} className={style.seeall}>See all ...</p>
                             <Carousel>
                                 {OwnerData.map((owner: any, index: number) => (
                                     <Carousel.Item key={index}>
                                         <div className={style.align_card}>
-                                            <div onClick={handleowner} className={`card ${style.responsiveCard}`}>
+                                            <div onClick={() => handleOwner(owner)} className={`card ${style.responsiveCard}`}>
                                                 <Image
                                                     className={style.image}
                                                     // src={image}

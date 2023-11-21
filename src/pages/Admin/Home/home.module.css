@@ -134,5 +134,11 @@ height: 33%;
   .cardname{
     padding: 10px;
   }
+  .seeall{
+    display: flex;
+    justify-content: flex-end;
+    color: #3de22b;
+    cursor: pointer;
+  }
 
   

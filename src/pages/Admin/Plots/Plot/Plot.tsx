@@ -33,7 +33,6 @@ const Plot: React.FC = (props: Props) => {
                         </div>
                     </div>
                 </div>
-
             </div>
         </>
     )
