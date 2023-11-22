@@ -4,14 +4,14 @@ import Col from 'react-bootstrap/Col';
 import { deletePlot, editPlot, getPlot } from '../../../../service/adminApi';
 import Nav from '../../../../share/nav/Nav';
 import EditForm from '../../../../components/Modals/EditFormModal';
-import { fetchImageURLs } from '../../../../images/downloadIamge';
+// import { fetchImageURLs } from '../../../../images/downloadIamge';
 import { useNavigate, useParams } from 'react-router-dom';
 import DeleteImage from '../../../../images/deleteImage';
 
 const Plot: React.FC = () => {
   const [Data, setData] = useState({});  
   const navigator = useNavigate()
-  const [imageURLs, setImageURLs] = useState<string[]>([]);
+  // const [imageURLs, setImageURLs] = useState<string[]>([]);
   const { id } = useParams<{ id: string }>();
 
   useEffect(() => {
@@ -25,17 +25,17 @@ const Plot: React.FC = () => {
         }
       });
 
-    fetchImageURLs('img/')
-      .then((url) => {
-        setImageURLs(url);
-      })
-      .catch((error) => {
-        console.log('Error fetching image URLs:', error);
-      });
+    // fetchImageURLs('img/')
+    //   .then((url) => {
+    //     setImageURLs(url);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error fetching image URLs:', error);
+    //   });
   }, [id]);
 
-  const image = imageURLs.find((img) => img.name === Data.images);
-  console.log(image);
+  // const image = imageURLs.find((img) => img.name === Data.images);
+  // console.log(image);
   
 
   const handleDelete = () => {
@@ -44,7 +44,7 @@ const Plot: React.FC = () => {
     deletePlot(id)
       .then((res) => {
         if (res.data === 'deleted') {
-          navigator('/owner/plots')
+          navigator('/admin/plots')
         } else {
           alert('Plot not deleted');
         }
@@ -85,7 +85,7 @@ const renderFeatureImages = () => {
             <Col style={{ display: "contents" }} xs={6} md={4}>
               <Image
                 style={{ width: "40%" }}
-                src={image?.url}
+                // src={image?.url}
                 rounded
               />
             </Col>

@@ -5,13 +5,18 @@ import Nav from '../../../share/nav/Nav'
 import Image from 'react-bootstrap/Image';
 // import Card from '../../../share/card/Card';
 import { useNavigate } from 'react-router-dom';
+// import { fetchImageURLs } from '../../../images/downloadIamge';
 import { Plots } from '../../../service/adminApi';
 
 // type Props = {}
 
 const Plot: React.FC = () => {
     const [PlotsData, setPlotsData] = useState([])
+    // const [imageURLs, setImageURLs] = useState<string[]>([]);
+
     console.log(PlotsData);
+    // console.log(imageURLs);
+    
     
   const navigate = useNavigate()
 
@@ -22,6 +27,14 @@ const Plot: React.FC = () => {
         }
         setPlotsData(res.data.data.plot)
     })
+
+    //     fetchImageURLs('img/')
+    //   .then((url) => {
+    //     setImageURLs(url);
+    //   })
+    //   .catch((error) => {
+    //     console.log('Error fetching image URLs:', error);
+    //   });
   },[])
 
   const HandleSearch = () => {
@@ -57,11 +70,19 @@ const Plot: React.FC = () => {
                         {
                             PlotsData.map((plot:any, index:number)=>(
                                 <div onClick={()=>handleplot(plot._id)} key={index} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
-                            <Image
+                           
+                           {/* {imageURLs.map((image:string)=>{
+                            if (image.name === plot.images) {
+                                return(
+                                <Image
                                 style={{ width: "34%" }}
-                                src="https://st2.depositphotos.com/7149852/43935/i/600/depositphotos_439359610-stock-photo-top-aerial-view-many-cars.jpg"
+                                src={image.url}
                                 rounded
                             />
+                            ) }
+                     
+})} */}
+
                             <div style={{ padding: "10px" }} className="cardname">
                                 <h6>Center: {plot.center}</h6>
                                 <h6>Place: {plot.placename} </h6>

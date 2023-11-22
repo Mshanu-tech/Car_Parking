@@ -13,12 +13,12 @@ const DeleteImage: React.FC<DeleteImageProps> = ({ imagePath, onDeleteSuccess })
   const imageRef = ref(storage, imagePath);
 
   // console.log(imagePath);
-  
+
   const handleDeleteImage = async () => {
     try {
+      onDeleteSuccess(); 
       await deleteObject(imageRef);
       console.log('Image deleted successfully.');
-      onDeleteSuccess(); 
     } catch (error) {
       console.error('Error deleting image:', error);
     }
