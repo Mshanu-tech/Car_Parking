@@ -16,6 +16,9 @@ export const owners = async () => {
 export const getowner = async (id:string) => {
     return await axiosInstance('JwtToken').get(`/admin/owner/${id}`)    
 }
+export const getuser = async (id:string) => {
+    return await axiosInstance('JwtToken').get(`/admin/user/${id}`)    
+}
 export const getPlot = async (id:string) => {
     return await axiosInstance('JwtToken').get(`/admin/plot/${id}`);
 }

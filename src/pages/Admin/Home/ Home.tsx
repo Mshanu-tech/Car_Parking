@@ -12,27 +12,27 @@ import Nav from '../../../share/nav/Nav'
 import style from './home.module.css'
 import { useNavigate } from 'react-router-dom';
 import { Plots, owners, users } from '../../../service/adminApi';
-import { fetchImageURLs } from '../../../images/downloadIamge';
+// import { fetchImageURLs } from '../../../images/downloadIamge';
 
 // type Props = {}
 
 const Home: React.FC = () => {
 
     const [PlotData, setPlotData] = useState([])
-    const [PlotimageURLs, setPlotImageURLs] = useState<string[]>([]);
+    // const [PlotimageURLs, setPlotImageURLs] = useState<string[]>([]);
 
     const [UserData, setUserData] = useState([])
-    const [UserimageURLs, setUserImageURLs] = useState<string[]>([]);
+    // const [UserimageURLs, setUserImageURLs] = useState<string[]>([]);
 
     const [OwnerData, setOwnerData] = useState([])
-    const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
+    // const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
 
     console.log("plot", PlotData);
     console.log("user", UserData);
     console.log("owner", OwnerData);
-    console.log("ownerPhoto", OwnerimageURLs);
-    console.log("userPhoto", UserimageURLs);
-    console.log("plotPhoto", PlotimageURLs);
+    // console.log("ownerPhoto", OwnerimageURLs);
+    // console.log("userPhoto", UserimageURLs);
+    // console.log("plotPhoto", PlotimageURLs);
 
 
     const [show, setShow] = useState(false);
@@ -41,13 +41,13 @@ const Home: React.FC = () => {
     const handleClose = () => setShow(false);
     const handleShow = () => setShow(true);
 
-    const handleowner = () => {
+    const handleowners = () => {
         navigate('owners')
     }
-    const handleuser = () => {
+    const handleusers = () => {
         navigate('users')
     }
-    const handleplot = () => {
+    const handleplots = () => {
         navigate('plots')
     }
 
@@ -64,13 +64,13 @@ const Home: React.FC = () => {
             }
         });
 
-        fetchImageURLs('user/')
-            .then((urls) => {
-                setUserImageURLs(urls)
-            })
-            .catch((error) => {
-                console.error('Error fetching image URLs:', error);
-            })
+        // fetchImageURLs('user/')
+        //     .then((urls) => {
+        //         setUserImageURLs(urls)
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error fetching image URLs:', error);
+        //     })
 
         //user
 
@@ -85,13 +85,13 @@ const Home: React.FC = () => {
             }
         });
 
-        fetchImageURLs('owner/')
-            .then((urls) => {
-                setOwnerImageURLs(urls)
-            })
-            .catch((error) => {
-                console.error('Error fetching image URLs:', error);
-            })
+        // fetchImageURLs('owner/')
+        //     .then((urls) => {
+        //         setOwnerImageURLs(urls)
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error fetching image URLs:', error);
+        //     })
 
         //owner
 
@@ -106,13 +106,13 @@ const Home: React.FC = () => {
             }
         });
 
-        fetchImageURLs('plot/')
-            .then((urls) => {
-                setPlotImageURLs(urls)
-            })
-            .catch((error) => {
-                console.error('Error fetching image URLs:', error);
-            })
+        // fetchImageURLs('plot/')
+        //     .then((urls) => {
+        //         setPlotImageURLs(urls)
+        //     })
+        //     .catch((error) => {
+        //         console.error('Error fetching image URLs:', error);
+        //     })
 
         //plot
 
@@ -121,10 +121,16 @@ const Home: React.FC = () => {
     const handleOwner = (owner:any) => {
         navigate(`/admin/owners/${owner._id}`)
     }
+    const handleuser = (id:string) => {
+        navigate(`/admin/users/${id}`)
+    }
+    const handleplot = (id:string) => {
+        navigate(`/admin/plots/${id}`)
+    }
 
     return (
         <>
-            <Nav BtnAction={"admin/login"} />
+            <Nav name='' BtnAction={"admin/login"} />
             <div className="container-fluid">
                 <div className={`row ${style.main}`}>
                     <div className={style.leftside}>
@@ -178,7 +184,7 @@ const Home: React.FC = () => {
                         </div>
                         <div className={style.owners}>
                             <h5 className={style.sub_heading}>OWNERS</h5>
-                                                            <p onClick={handleowner} className={style.seeall}>See all ...</p>
+                               <p onClick={handleowners} className={style.seeall}>See all ...</p>
                             <Carousel>
                                 {OwnerData.map((owner: any, index: number) => (
                                     <Carousel.Item key={index}>
@@ -226,22 +232,23 @@ const Home: React.FC = () => {
 
                         <div className={style.plots}>
                             <h5 className={style.sub_heading}>PLOTS</h5>
+                            <p onClick={handleplots} className={style.seeall}>See all ...</p>
+                            <p onClick={()=>handleplot("uhiljiouiholij")}>plot</p>
+
                             <Carousel>
-                                {UserData.map((user: any, index: number) => (
-
+                                {PlotData.map((plot: any, index: number) => (
                                     <Carousel.Item>
-                                        <div className={style.align_card}>
-
-                                            <div onClick={handleplot} className={`card ${style.responsiveCard}`}>
+                                        <div key={index} className={style.align_card}>
+                                            <div onClick={()=>handleplot(plot._id)} className={`card ${style.responsiveCard}`}>
                                                 <Image
                                                     className={style.image}
                                                     // src={image}
                                                     rounded
                                                 />
                                                 <div className={style.cardname}>
-                                                    <h6>Name: {user.name}</h6>
-                                                    <h6>Phone: {user.phone}</h6>
-                                                    <h6>Email: {user.email} </h6>
+                                                    <h6>Name: {plot.name}</h6>
+                                                    <h6>Phone: {plot.phone}</h6>
+                                                    <h6>Email: {plot.email} </h6>
                                                 </div>
                                             </div>
                                         </div>
@@ -262,13 +269,14 @@ const Home: React.FC = () => {
 
                         <div className={style.users}>
                             <h5 className={style.sub_heading}>USERS</h5>
+                            <p onClick={handleusers} className={style.seeall}>See all ...</p>
                             <Carousel>
                                 {UserData.map((user: any, index: number) => (
 
                                     <Carousel.Item>
-                                        <div className={style.align_card}>
+                                        <div key={index} className={style.align_card}>
 
-                                            <div onClick={handleuser} className={`card ${style.responsiveCard}`}>
+                                            <div onClick={()=>handleuser(user._id)} className={`card ${style.responsiveCard}`}>
                                                 <Image
                                                     className={style.image}
                                                     // src={image}

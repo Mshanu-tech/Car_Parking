@@ -4,15 +4,15 @@ import Search from '../../../components/search/Search'
 import { useNavigate } from 'react-router-dom';
 import { useEffect, useState } from 'react';
 import { owners } from '../../../service/adminApi';
-import Image from 'react-bootstrap/Image';
-import { fetchImageURLs } from '../../../images/downloadIamge';
+// import Image from 'react-bootstrap/Image';
+// import { fetchImageURLs } from '../../../images/downloadIamge';
 
 type Props = {}
 
 function Owner({ }: Props) {
     const [ownerData, setOwnerData] = useState([])
-    const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
-    console.log(OwnerimageURLs);
+    // const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
+    // console.log(OwnerimageURLs);
 
     const navigate = useNavigate()
 
@@ -43,11 +43,11 @@ function Owner({ }: Props) {
 
     return (
         <>
-            <Nav name='user' />
+            <Nav BtnAction="asmin" name='user' />
 
             <div className='container-fluid'>
                 <div>
-                    <Search />
+                    <Search  />
                 </div>
                 <div className="row">
                     <div className={style.align_card}>

@@ -22,7 +22,8 @@ const AdminRouter = () => {
         <Route path='/users' element={<Users/>}/>
         <Route path='/owners' element={<Owners/>}/>
         <Route path='/plots' element={<Plots/>}/>
-        <Route path='/user' element={<User/>}/>
+        <Route path='/users' element={<Users/>}/>
+        <Route path='/users/:id' element={<User/>}/>
         <Route path='/owners/:id' element={<Owner/>}/>
         {/* <Route path='/owners/:id/plot' element={<OwnerPlot/>}/> */}
         <Route path='/plots/:id' element={<Plot/>}/>

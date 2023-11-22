@@ -1,0 +1,25 @@
+.aligncard{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: space-evenly;
+    padding-top: 20px;
+}
+h4{
+    font-weight: bold;
+    color: rgb(255, 255, 255);
+}
+.ownerProfile{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
+}
+.ownerImage{
+    display: contents;
+}
+.ownerDetails{
+    font-weight: bold;
+    color: rgb(255, 252, 252);
+    display: contents;  
+    margin-top: 20px;
+}
