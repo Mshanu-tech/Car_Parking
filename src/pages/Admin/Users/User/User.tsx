@@ -12,19 +12,19 @@ import { getuser } from '../../../../service/adminApi';
 // type Props = {}
 
 const Owner = () => {
-    const [ownerData, setOwnerData] = useState({})
+    const [UserData, setUsererData] = useState({})
     // const [imageURLs, setImageURLs] = useState<string[]>([]);
     const { id } = useParams<{ id: string }>();
     const navigate = useNavigate()
-    console.log(id);
+    // console.log(imageURLs);
 
     useEffect(() => {
         getuser(id)
-            .then((res) => {
-                setOwnerData(res.data)
+            .then((res) => {                
+                setUsererData(res.data)
             })
 
-        // fetchImageURLs('owner/')
+        // fetchImageURLs('user/')
         //     .then((url) => {
         //         setImageURLs(url);
         //     })
@@ -33,7 +33,7 @@ const Owner = () => {
         //     });
     }, [id])
 
-    // const image = imageURLs.find((img) => img.name === ownerData.image);
+    // const image = imageURLs.find((img) => img.name === UserData.image);
     // console.log(image.url);
 
     const handleplot = () => {
@@ -52,12 +52,13 @@ const Owner = () => {
                                 thumbnail />
                         </Col>
                         <div className={style.ownerDetails}>
-                            <h5>Name:{ownerData.name}</h5>
-                            <h6>Email:{ownerData.email}</h6>
-                            <h6>Phone:{ownerData.phone}</h6>
+                            <h5>Name:{UserData.name}</h5>
+                            <h6>Email:{UserData.email}</h6>
+                            <h6>Phone:{UserData.phone}</h6>
                         </div>
                     </div>
-                                            <h4>PLOTS</h4>
+                    
+                            <h4>PLOTS</h4>
 
                     <div>
                         <div className={style.aligncard}>

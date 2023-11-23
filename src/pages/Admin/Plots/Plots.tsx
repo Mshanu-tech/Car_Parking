@@ -7,14 +7,17 @@ import Image from 'react-bootstrap/Image';
 import { useNavigate } from 'react-router-dom';
 // import { fetchImageURLs } from '../../../images/downloadIamge';
 import { Plots } from '../../../service/adminApi';
+import Search from '../../../components/search/Search';
 
 // type Props = {}
 
 const Plot: React.FC = () => {
     const [PlotsData, setPlotsData] = useState([])
     // const [imageURLs, setImageURLs] = useState<string[]>([]);
+    const [filteredPlots, setFilteredPlots] = useState([]);
+    const [query, setQuery] = useState('');
 
-    console.log(PlotsData);
+    console.log(filteredPlots);
     // console.log(imageURLs);
     
     
@@ -26,6 +29,7 @@ const Plot: React.FC = () => {
             alert("plot not get")
         }
         setPlotsData(res.data.data.plot)
+        setFilteredPlots(res.data.data.plot)
     })
 
     //     fetchImageURLs('img/')
@@ -37,9 +41,18 @@ const Plot: React.FC = () => {
     //   });
   },[])
 
-  const HandleSearch = () => {
-    
-  }
+  useEffect(() => {
+    const lowerCaseQuery = query.toLowerCase();
+    const filtered = PlotsData.filter((plot) => {
+        const plotData = plot.center.toLowerCase();
+        return plotData.includes(lowerCaseQuery);
+    });
+    setFilteredPlots(filtered);
+}, [query]);
+
+  const handleSearch = (inputValue: string) => {
+    setQuery(inputValue)
+};
   const handleplot = (id:string) =>{
     navigate(`/admin/plots/${id}`)
   }
@@ -47,13 +60,17 @@ const Plot: React.FC = () => {
     <>
       <div className={css.plot_image}>
         <Nav />
+        <div className='container-fluid'>
+            <div>
+                <Search value={query} searchAction={handleSearch}/>
+            </div>
         <div className={`row ${css.search}`}>
-          <Form.Control className={css.search_input}
+          {/* <Form.Control className={css.search_input}
             aria-label="Example text with button addon"
             aria-describedby="basic-addon1"
             placeholder='Search'
-          />
-          <button onClick={HandleSearch} className={css.search_button}><i style={{ paddingTop: "7px" }} className='bx bx-search bx-sm'></i></button>
+            /> */}
+          {/* <button  className={css.search_button}><i style={{ paddingTop: "7px" }} className='bx bx-search bx-sm'></i></button> */}
           <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
                         <div onClick={handleplot} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
                             <Image
@@ -67,8 +84,9 @@ const Plot: React.FC = () => {
                                 <h6>Email: ajith123@gmail.com</h6>
                             </div>
                         </div>
+
                         {
-                            PlotsData.map((plot:any, index:number)=>(
+                            filteredPlots.map((plot:any, index:number)=>(
                                 <div onClick={()=>handleplot(plot._id)} key={index} className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
                            
                            {/* {imageURLs.map((image:string)=>{
@@ -81,7 +99,7 @@ const Plot: React.FC = () => {
                             />
                             ) }
                      
-})} */}
+                             })} */}
 
                             <div style={{ padding: "10px" }} className="cardname">
                                 <h6>Center: {plot.center}</h6>
@@ -91,7 +109,7 @@ const Plot: React.FC = () => {
                         </div>
                             ))
                         }
-                        
+
                     </div>
                     {/* <div className='' style={{ display: "flex", flexWrap: "wrap" }}>
                         <div  className={`card ${css.responsiveCard}`} style={{ marginTop: "35px" }}>
@@ -119,7 +137,7 @@ const Plot: React.FC = () => {
                             </div>
                         </div>
                     </div> */}
-                    
+               </div>
         </div>
       </div>
     </>

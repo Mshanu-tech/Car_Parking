@@ -12,6 +12,8 @@ type Props = {}
 function Owner({ }: Props) {
     const [ownerData, setOwnerData] = useState([])
     // const [OwnerimageURLs, setOwnerImageURLs] = useState<string[]>([]);
+    const [filteredOwners, setFilteredOwners] = useState([]);
+    const [query, setQuery] = useState('');
     // console.log(OwnerimageURLs);
 
     const navigate = useNavigate()
@@ -25,6 +27,7 @@ function Owner({ }: Props) {
             } else {
                 const data = res.data.data.owner
                 setOwnerData(data)
+                setFilteredOwners(data)
             }
         });
 
@@ -37,8 +40,20 @@ function Owner({ }: Props) {
         //     })
     }, [])
 
+    useEffect(() => {
+        const lowerCaseQuery = query.toLocaleLowerCase()
+        const filtered = ownerData.filter((owner) => {
+            const Data = owner.name.toLowerCase();
+            return Data.includes(lowerCaseQuery)
+        })
+        setFilteredOwners(filtered)
+    },[query])
+
     const handleOwner = (owner:any) => {
         navigate(`/admin/owners/${owner._id}`)
+    }
+    const handleSearch = (inputValue: string) =>{
+        setQuery(inputValue)
     }
 
     return (
@@ -47,13 +62,13 @@ function Owner({ }: Props) {
 
             <div className='container-fluid'>
                 <div>
-                    <Search  />
+                    <Search value={query} searchAction={handleSearch} />
                 </div>
                 <div className="row">
                     <div className={style.align_card}>
 
                         {
-                            ownerData.map((owner: any, index: number) => (
+                            filteredOwners.map((owner: any, index: number) => (
                                 <div  onClick={() => handleOwner(owner)} key={index} >
 
                                     <div className={`card ${style.responsiveCard}`}>
