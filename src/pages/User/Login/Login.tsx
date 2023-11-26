@@ -40,7 +40,8 @@ const Login: React.FC = () => {
       name,
       email,
       phone,
-      password
+      password,
+      Image:uniqueImageName
     };
     console.log(userdata);
     await userData(userdata)

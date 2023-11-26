@@ -21,7 +21,7 @@ const OwnerRouter: React.FC = () => {
         <Route path='/plots/plot/:id' element={<Plot />} />
         <Route path='/plots/plotform' element={<PlotForm />} />
         <Route path='/users' element={<Users />} />
-        <Route path='/users/user' element={<User />} />
+        <Route path='/users/:id' element={<User />} />
         <Route path='/users/user/car' element={<Car />} />
         <Route path='/profile' element={<Profile />} />
         <Route path='/otpverification' element={<OwnerOtpverification />} />

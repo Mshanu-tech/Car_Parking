@@ -32,3 +32,6 @@ export const Ownerotpverificaton = async (value:any) => {
 export const getUsers = async () => {
     return await axiosInstance('JwtToken').get("/owner/users");
 }
+export const getUser = async (id:string) => {
+    return await axiosInstance('JwtToken').get(`/owner/user/${id}`);
+}

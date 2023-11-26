@@ -16,9 +16,8 @@ const Users = () => {
   
     const navigate = useNavigate();
   
-    const handleUser = (e: any) => {
-      e.preventDefault();
-      navigate('user');
+    const handleUser = (id:string) => {
+      navigate(`/owner/users/${id}`);
     };
   
     useEffect(() => {
@@ -72,7 +71,7 @@ const Users = () => {
                         </div>
                         {
                             filteredUsers.map((users: any , index: number)=>(
-                                <div key={index} onClick={handleUser} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
+                                <div key={index} onClick={()=>handleUser(users._id)} className={`card ${style.responsiveCard}`} style={{ marginTop: "35px" }}>
                                 <Image
                                     style={{ width: "32%" }}
                                     src="https://www.balloonsunlimitedchennai.com/cdn/shop/products/1_6959ed8f-fc51-4123-8fa2-be72fad48146_1800x.jpg?v=1659462374"
