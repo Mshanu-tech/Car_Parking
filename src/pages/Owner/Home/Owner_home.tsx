@@ -2,8 +2,8 @@
 import { useNavigate } from "react-router-dom";
 import Nav from "../../../share/nav/Nav";
 import style from './owner_home.module.css';
-import axios from "axios";
-import { useDispatch } from "react-redux";
+// import axios from "axios";
+// import { useDispatch } from "react-redux";
 
 type Props = {};
 
