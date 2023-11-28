@@ -16,14 +16,14 @@ const OwnerHome = (props: Props) => {
 // import { isLoggedin } from "../../../api/owner";
 
     const handleUser = async (e: any) => {
-        e.preventDefault();
-        navigate('users');
-        try {
-            const response = await axios.get("http://localhost:5000/owner/users");
-            console.log("success");
-        } catch (error) {
-            console.log(error);
-        }
+        // e.preventDefault();
+        // navigate('users');
+        // try {
+        //     const response = await axios.get("http://localhost:5000/owner/users");
+        //     console.log("success");
+        // } catch (error) {
+        //     console.log(error);
+        // }
     }
 
     
