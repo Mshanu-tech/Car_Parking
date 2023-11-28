@@ -2,12 +2,12 @@
 import { useNavigate } from "react-router-dom";
 import Nav from "../../../share/nav/Nav";
 import style from './owner_home.module.css';
-// import axios from "axios";
+import axios from "axios";
 // import { useDispatch } from "react-redux";
 
-type Props = {};
+// type Props = {};
 
-const OwnerHome = (props: Props) => {
+const OwnerHome = () => {
     const navigate = useNavigate();
     const handlePlot = () => {
 
@@ -16,14 +16,14 @@ const OwnerHome = (props: Props) => {
 // import { isLoggedin } from "../../../api/owner";
 
     const handleUser = async (e: any) => {
-        // e.preventDefault();
-        // navigate('users');
-        // try {
-        //     const response = await axios.get("http://localhost:5000/owner/users");
-        //     console.log("success");
-        // } catch (error) {
-        //     console.log(error);
-        // }
+        e.preventDefault();
+        navigate('users');
+        try {
+            const response = await axios.get("http://localhost:5000/owner/users");
+            console.log(response,"success");
+        } catch (error) {
+            console.log(error);
+        }
     }
 
     
